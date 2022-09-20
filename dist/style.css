@@ -13,8 +13,6 @@
   box-sizing: border-box;
 }
 
-
-
 body {
   min-height: 100%;
   width: 100%;
@@ -269,7 +267,7 @@ textarea {
   cursor: pointer;
 }
 
-.modal-sidebar-list li:hover {
+.modal-sidebar-list li:hover:not(.active-section) {
   transform: scale(1.2);
   transform-origin: left;
   transition: all 250ms ease-out;
@@ -380,7 +378,7 @@ textarea {
 }
 
 .add-todo-btn {
-  background-color: var(--color-borders);
+  background-color: var(--color-header-bcg);
   color: rgb(255, 255, 255);
   padding: 1rem;
   border-radius: 10px;
@@ -389,7 +387,7 @@ textarea {
 }
 
 .add-todo-btn:hover {
-  background-color: var(--color-header-bcg);
+  background-color: var(--color-borders);
 }
 
 .modal-close-btn {
