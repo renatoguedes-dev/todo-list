@@ -2,9 +2,9 @@
 
 :root {
   --color-letters: hsl(0, 0%, 30%);
-  --color-bcg: hsl(0, 0%, 95%);
-  --color-header-bcg: hsl(142, 77%, 73%);
-  --color-borders: #159e47;
+  --color-bcg: hsl(0, 0%, 96%);
+  --color-header-bcg: hsl(183, 100%, 37%);
+  --color-borders: hsl(183, 100%, 40%);
 }
 
 * {
@@ -29,62 +29,70 @@ body {
 }
 
 .header {
-  background-color: #86efac;
+  background-color: var(--color-header-bcg);
   height: 8vh;
   display: flex;
   align-items: center;
   padding-left: 3rem;
-  color: var(--color-letters);
+  color: white;
+}
+
+.header img {
+  height: 38px;
+  margin-right: .5rem;
 }
 
 .sidebar {
   width: max(300px, 20vw);
   background-color: var(--color-bcg);
   color: var(--color-letters);
-  /* height: 84.6vh; */
   padding: 3rem;
-  font-size: clamp(0.5rem, 1vmin + 1rem, 25px);
+  font-size: 0.5rem;
+  font-size: clamp(0.5rem, 1vmin + 1rem, 21px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
 
-.sidebar li.sidebar-nav:hover:not(.active-section) {
-  transform: scale(1.2);
-  transform-origin: left;
-  transition: all 250ms ease-out;
-  font-weight: bold;
+.sidebar li.sidebar-nav:hover:not(.active-section),
+.modal-sidebar-item:hover:not(.active-section) {
+  border: 1px solid var(--color-header-bcg);
 }
 
-.sidebar li {
-  margin-bottom: 1.5rem;
+.sidebar-nav,
+.modal-sidebar-item {
+  margin-bottom: 1.2rem;
   list-style: none;
   cursor: pointer;
-  width: fit-content;
-}
-
-ul.li-projects:first-child {
-  margin-top: 1.5rem;
-}
-
-ul.li-projects li {
-  margin-left: 1rem;
+  background-color: white;
+  padding: 0.5rem 1rem;
+  border: 1px solid transparent;
+  border-radius: 5px;
 }
 
 .li-projects {
+  font-size: 0.5rem;
   font-size: clamp(0.5rem, 1vmin + 1rem, 21px);
-  margin-top: 1.5rem;
 }
 
-p.projects-title {
+.projects-line {
+  position: relative;
+}
+
+.projects-title {
   cursor: default;
+  padding: 3rem 0 0.5rem 1rem;
+  border-bottom: 1px solid var(--color-letters);
+  margin-bottom: 1.5rem;
+  font-weight: bold;
 }
 
 .new-todo-button {
+  position: absolute;
   background-color: var(--color-header-bcg);
-  height: 3rem;
-  width: 3rem;
-  font-size: 3rem;
+  height: 1.6rem;
+  width: 1.6rem;
+  font-size: 1.6rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -92,11 +100,13 @@ p.projects-title {
   color: white;
   border-radius: 50%;
   cursor: pointer;
+  top: 60%;
+  right: 1%;
 }
 
 .new-todo-button:hover {
-  transform: scale(1.8);
-  transition: all 250ms ease-out;
+  transform: scale(1.3);
+  transition: all 300ms ease-out;
   rotate: 90deg;
 }
 
@@ -121,10 +131,9 @@ p.projects-title {
 }
 
 .content:hover {
-  transform: scale(1.025);
+  transform: scale(1.005);
   box-shadow: 3px 3px 5px 2px hsla(0, 0%, 0%, 0.4);
   transition: all 250ms ease-out;
-  font-size: calc(clamp(0.5rem, 1vmin + 1rem, 25px) * 1.2);
 }
 
 .content > * > *,
@@ -216,7 +225,6 @@ textarea {
   transform: translate(-50%, -50%) scale(0);
   transition: 300ms ease-in-out;
   border: 1px solid black;
-  border-radius: 0.5rem;
   z-index: 10;
   background-color: hsl(214, 32%, 91%);
   height: clamp(15vh, 55vh + 1px, 800px);
@@ -227,7 +235,7 @@ textarea {
 .modal.active {
   transform: translate(-50%, -50%) scale(1);
   border: none;
-  border-radius: 0;
+  border-radius: 0.5rem;
 }
 
 .modal-header {
@@ -257,21 +265,14 @@ textarea {
   background-color: var(--color-bcg);
   color: var(--color-letters);
   padding: 1.4rem;
-  font-size: 1.1rem;
-  font-size: clamp(1.1rem, 1.006rem + 0.47000000000000003vw, 1.57rem);
+  font-size: 0.5rem;
+  font-size: clamp(0.5rem, 1vmin + 1rem, 25px);
 }
 
 .modal-sidebar li {
   list-style: none;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   cursor: pointer;
-}
-
-.modal-sidebar-list li:hover:not(.active-section) {
-  transform: scale(1.2);
-  transform-origin: left;
-  transition: all 250ms ease-out;
-  font-weight: bold;
 }
 
 .modal-body {
@@ -422,9 +423,10 @@ textarea {
 }
 
 .active-section {
-  font-weight: bold;
+  /* font-weight: bold;
   border-bottom: 2px solid hsl(0, 0%, 30%);
   width: fit-content;
-  transform: scale(1.2);
-  font-weight: bold;
+  transform: scale(1.2); */
+  background-color: var(--color-header-bcg);
+  color: white;
 }
