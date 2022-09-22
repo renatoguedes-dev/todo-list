@@ -13,7 +13,8 @@
 <body>
 
   <header id="header" class="header">
-    <h1>To-do List</h1>
+    <img src="./images/reminder.png" alt="">
+    <h1>ToDo</h1>
   </header>
 
   <main id="main" class="main">
@@ -21,23 +22,25 @@
     <div class="sidebar" id="sidebar">
       <div>
         <ul>
-          <li class="sidebar-nav">Home</li>
+          <li class="sidebar-nav">All</li>
           <li class="sidebar-nav">Today</li>
-          <li class="sidebar-nav">This week</li>
-          <li>
-            <p class="projects-title">Projects</p> 
+          <li class="sidebar-nav">Week</li>
+          <li class="sidebar-nav">Important</li>
+          <div class="projects-line">
+            <div class="projects-title" id="projectsTitle">Projects</div> 
+
+            <div data-modal-target="#modal" id="newTodoBtn" 
+            class="new-todo-button">
+            <p>+</p></div>
+          </div>
             <ul class="li-projects">
               <li class="sidebar-nav">Study</li>
               <li class="sidebar-nav">Work</li>
               <li class="sidebar-nav">Leisure</li>
             </ul>
           </li>
-          <li class="sidebar-nav">Post-it notes</li>
+
         </ul>
-      </div>
-      <div data-modal-target="#modal" id="newTodoBtn" 
-        class="new-todo-button">
-        <p>+</p>
       </div>
     </div>
 
@@ -159,9 +162,8 @@
         <div class="modal-sidebar">
           <div>
             <ul class="modal-sidebar-list">
-              <li class="modal-sidebar-item">To do</li>
               <li class="modal-sidebar-item">Project</li>
-              <li class="modal-sidebar-item">Post-it</li>
+              <li class="modal-sidebar-item">To do</li>
             </ul>
           </div>
         </div>
