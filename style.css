@@ -87,6 +87,12 @@ body {
   display: flex;
 }
 
+.sidebar-nav p {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .sidebar-nav * {
 align-self: center;
 }
@@ -188,9 +194,8 @@ a.select {
 .tasks-div {
   margin: 0 auto;
   padding: 0 2.5rem;
-  /* width: max(85%, 500px); */
   width: clamp(250px, 85% + 1px, 1200px);
-  /* width: 85%; */
+  text-align: left;
 }
 
 .tasks-title {
