@@ -1,6 +1,8 @@
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
 const sidebarModalItems = document.querySelectorAll(".modal-sidebar-item");
+const openModalButton = document.querySelector("#newTodoBtn");
+const closeModalButton = document.querySelector("#modalCloseBtn");
 
 export function openModal() {
   modal.classList.add("active");
@@ -34,3 +36,7 @@ export function removeAllChildNodes(parent) {
     parent.removeChild(parent.firstChild);
   }
 }
+
+overlay.addEventListener("click", closeModal);
+openModalButton.addEventListener("click", openModal);
+closeModalButton.addEventListener("click", closeModal);

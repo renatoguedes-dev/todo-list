@@ -6,8 +6,10 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 
+let sidebarItems = document.querySelectorAll(".sidebar-nav");
+
 function checkClassList() {
-  const sidebarItems = document.querySelectorAll(".sidebar-nav");
+  sidebarItems = document.querySelectorAll(".sidebar-nav");
 
   for (let i = 0; i < sidebarItems.length; i++) {
     if (sidebarItems[i].classList.contains("active-section")) {
@@ -17,6 +19,7 @@ function checkClassList() {
 }
 
 export default function addClassList(e) {
+  e.preventDefault();
   const sidebarClicked = e.target;
 
   if (
@@ -46,3 +49,7 @@ export default function addClassList(e) {
     }
   }
 }
+
+sidebarItems.forEach((sidebarItem) =>
+  sidebarItem.addEventListener("click", addClassList)
+);
