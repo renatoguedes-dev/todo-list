@@ -5,9 +5,10 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
-const sidebarItems = document.querySelectorAll(".sidebar-nav");
 
 function checkClassList() {
+  const sidebarItems = document.querySelectorAll(".sidebar-nav");
+
   for (let i = 0; i < sidebarItems.length; i++) {
     if (sidebarItems[i].classList.contains("active-section")) {
       sidebarItems[i].classList.remove("active-section");
@@ -18,12 +19,30 @@ function checkClassList() {
 export default function addClassList(e) {
   const sidebarClicked = e.target;
 
-  if (!sidebarClicked.classList.contains("active-section")) {
+  if (
+    !sidebarClicked.classList.contains("active-section") &&
+    sidebarClicked.classList.contains("sidebar-nav")
+  ) {
     checkClassList();
     sidebarClicked.classList.add("active-section");
+  } else if (
+    sidebarClicked.parentElement.className === "sidebar-nav" ||
+    sidebarClicked.parentElement.className === "sidebar-nav projects-nav"
+  ) {
+    const clicked = sidebarClicked.parentElement;
+    if (!clicked.classList.contains("active-section")) {
+      checkClassList();
+      clicked.classList.add("active-section");
+    }
+  } else if (
+    sidebarClicked.parentElement.parentElement.className === "sidebar-nav" ||
+    sidebarClicked.parentElement.parentElement.className ===
+      "sidebar-nav projects-nav"
+  ) {
+    const clicked = sidebarClicked.parentElement.parentElement;
+    if (!clicked.classList.contains("active-section")) {
+      checkClassList();
+      clicked.classList.add("active-section");
+    }
   }
 }
-
-sidebarItems.forEach((sidebarItem) =>
-  sidebarItem.addEventListener("click", addClassList)
-);

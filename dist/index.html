@@ -1,199 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="./main.js" defer></script>
-  <link rel="stylesheet" href="./style.css">
+    <script src="./main.js" defer></script>
+    <link rel="stylesheet" href="./style.css" />
 
-  <title>Todo List</title>
-</head>
-<body>
+    <title>Todo List</title>
+  </head>
+  <body>
+    <header id="header" class="header">
+      <img src="./images/reminder.png" alt="" />
+      <h1>ToDo</h1>
+    </header>
 
-  <header id="header" class="header">
-    <img src="./images/reminder.png" alt="">
-    <h1>ToDo</h1>
-  </header>
-
-  <main id="main" class="main">
-
-    <div class="sidebar" id="sidebar">
-      <div>
-        <ul>
-          <li class="sidebar-nav">All</li>
-          <li class="sidebar-nav">Today</li>
-          <li class="sidebar-nav">Week</li>
-          <li class="sidebar-nav">Important</li>
-          <div class="projects-line">
-            <div class="projects-title" id="projectsTitle">Projects</div> 
-
-            <div data-modal-target="#modal" id="newTodoBtn" 
-            class="new-todo-button">
-            <p>+</p></div>
-          </div>
-            <ul class="li-projects">
-              <li class="sidebar-nav">Study</li>
-              <li class="sidebar-nav">Work</li>
-              <li class="sidebar-nav">Leisure</li>
-            </ul>
-          </li>
-
-        </ul>
-      </div>
-    </div>
-
-    <div id="mainContent" class="main-content">
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>example of content</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Aug 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-      <div id="content" class="content">
-        <div class="left-content">
-          <div class="checkbox"></div>
-          <p>Study arts</p>
-        </div>
-        <div class="right-content">
-          <div class="detail">Details</div>
-          <div class="due-date">Nov 30th</div>
-          <div class="images">
-            <img src="./images/note-edit-outline.png" alt="edit icon">
-            <img src="./images/trash-can-outline.png" alt="trash can icon">
-          </div>
-        </div>
-      </div>
-
-
-    </div>
-    <div class="modal" id="modal">
-      <div class="modal-header">
-        <h2>Create a new...</h2>
-        <div data-close-button class="modal-close-btn" id="modalCloseBtn">&times;</div>
-      </div>
-      <div class="modal-body">
-        <div class="modal-sidebar">
-          <div>
-            <ul class="modal-sidebar-list">
-              <li class="modal-sidebar-item">Project</li>
-              <li class="modal-sidebar-item">To do</li>
-            </ul>
-          </div>
-        </div>
-        <div class="modal-content">
-          <!-- <textarea name="new-todo-title" id="new-todo-title" 
-          maxlength="40" placeholder="Title: e.g Pay for the internet"></textarea>
-          <textarea name="new-todo-details" id="new-todo-details" 
-          placeholder="Details: e.g internet, phone, rent."></textarea>
-          <div class="new-todo-date">
-            <div class="new-date-text">Due date:</div>
-            <input type="date" name="todo-date" id="new-todo-date">
-          </div>
-          <div class="priority-line">
-            <div class="priority">
-              <div class="priority-text">Priority:</div>
-              <div class="low priority-buttons">Low</div>
-              <div class="medium priority-buttons">Medium</div>
-              <div class="high priority-buttons">High</div>
+    <main id="main" class="main">
+      <div class="sidebar" id="sidebar">
+        <div>
+          <div class="sidebar-nav">
+            <div class="sidebar-link">
+              <img
+                class="sidebar-icons"
+                src="./images/calendar-month-outline.png"
+                alt="month calendar"
+              />
             </div>
-            <button class="add-todo-btn">CREATE TO DO</button>
-          </div> -->
+            <p>All</p>
+          </div>
+          <div class="sidebar-nav">
+            <div class="sidebar-link">
+              <img
+                src="./images/calendar-today-outline.png"
+                alt="day calendar"
+                class="sidebar-icons"
+              />
+            </div>
+            <p>Today</p>
+          </div>
+          <div class="sidebar-nav">
+            <div class="sidebar-link">
+              <img
+                src="./images/calendar-week-outline.png"
+                alt="week calendar"
+                class="sidebar-icons"
+              />
+            </div>
+            <p>Week</p>
+          </div>
+          <div class="sidebar-nav">
+            <div class="sidebar-link">
+              <img
+                src="./images/calendar-alert-outline.png"
+                alt="calendar with alert"
+                class="sidebar-icons"
+              />
+            </div>
+            <p>Important</p>
+          </div>
+
+          <div class="projects-line">
+            <div class="projects-title" id="projectsTitle">Projects</div>
+
+            <div
+              data-modal-target="#modal"
+              id="newTodoBtn"
+              class="new-todo-button"
+            >
+              <p>+</p>
+            </div>
+          </div>
+
+          <div class="projects" id="projects">
+            
+            <div class="sidebar-nav projects-nav">
+              <img
+                class="sidebar-icons"
+                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
+                alt="A hammer and a screwdriver crossed"
+              />
+              <p class="project-name">Project 1</p>
+              <div class="project-edit-erase">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+
+            <div class="sidebar-nav projects-nav">
+              <img
+                class="sidebar-icons"
+                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
+                alt="A hammer and a screwdriver crossed"
+              />
+              <p class="project-name">Project 2</p>
+              <div class="project-edit-erase">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+
+            <div class="sidebar-nav projects-nav">
+              <img
+                class="sidebar-icons"
+                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
+                alt="A hammer and a screwdriver crossed"
+              />
+              <p class="project-name">Project 3</p>
+              <div class="project-edit-erase">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div id="overlay"></div>
 
-  </main>
+      <div id="mainContent" class="main-content">
+        <div class="content-title">
+          <img
+            class="content-title-img"
+            src="./images/calendar-month-outline.svg"
+            alt="month calendar"
+          />
+          <h1>All</h1>
+        </div>
+        <div class="tasks-div">
+          <div class="tasks-title">
+            <p>Tasks (<span class="tasks-count">3</span>)</p>
+          </div>
 
-  <footer class="footer">Copyright © Renato Guedes - 2022</footer>
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>example of content</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Aug 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
 
-  
-</body>
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="content" class="content">
+            <div class="left-content">
+              <div class="checkbox"></div>
+              <p>Study arts</p>
+            </div>
+            <div class="right-content">
+              <div class="detail">Details</div>
+              <div class="due-date">Nov 30th</div>
+              <div class="images">
+                <img src="./images/note-edit-outline.png" alt="edit icon" />
+                <img
+                  src="./images/trash-can-outline.png"
+                  alt="trash can icon"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal" id="modal">
+        <div class="modal-header">
+          <h2>Create a new project</h2>
+          <div data-close-button class="modal-close-btn" id="modalCloseBtn">
+            &times;
+          </div>
+        </div>
+        <div class="modal-body">
+          <div class="modal-content">
+            <form action="#">
+              <div class="fields">
+                <label for="project-title">Title</label>
+                <input type="text" name="project-title" id="project-title" />
+                <p class="modal-title-error hide">
+                  Please fill out this field.
+                </p>
+              </div>
+              <div class="icon-selection">
+                <p>Choose an icon</p>
+                <div class="project-icons">
+                  <div class="project-icon wrench-screwdriver active-icon">
+                    <img
+                      src="./images/projects-icons/wrench-screwdriver-crossed.svg"
+                      alt="a wrench and a screwdriver crossed"
+                    />
+                  </div>
+                  <div class="project-icon book-icon">
+                    <img
+                      src="./images/projects-icons/book.svg"
+                      alt="a book icon"
+                    />
+                  </div>
+                  <div class="project-icon money-bag-icon">
+                    <img
+                      src="./images/projects-icons/money-bag.svg"
+                      alt="a bag of money icon"
+                    />
+                  </div>
+                  <div class="project-icon pizza-slice-icon">
+                    <img
+                      src="./images/projects-icons/pizza-slice.svg"
+                      alt="a pizza slice icon"
+                    />
+                  </div>
+                  <div class="project-icon present-box-icon">
+                    <img
+                      src="./images/projects-icons/present-box.svg"
+                      alt="a present box icon"
+                    />
+                  </div>
+                  <div class="project-icon volleyball-ball-icon">
+                    <img
+                      src="./images/projects-icons/volleyball-ball.svg"
+                      alt="a volleyball ball icon"
+                    />
+                  </div>
+                  <div class="project-icon gym-icon">
+                    <img
+                      src="./images/projects-icons/dumbbells-exercise.svg"
+                      alt="a person holding two dumbbells icon"
+                    />
+                  </div>
+                </div>
+              </div>
+            </form>
+            <div class="modal-buttons">
+              <button class="cancel-modal-btn">Cancel</button>
+              <button class="add-project-btn">Add Project</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="overlay"></div>
+    </main>
+
+    <footer class="footer">Copyright © Renato Guedes - 2022</footer>
+  </body>
 </html>
