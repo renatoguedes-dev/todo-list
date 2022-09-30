@@ -6,6 +6,8 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 
+import { createProjectTitle } from "./projectContent";
+
 let sidebarItems = document.querySelectorAll(".sidebar-nav");
 
 function checkClassList() {
@@ -28,6 +30,7 @@ export default function addClassList(e) {
   ) {
     checkClassList();
     sidebarClicked.classList.add("active-section");
+    createProjectTitle(e);
   } else if (
     sidebarClicked.parentElement.className === "sidebar-nav" ||
     sidebarClicked.parentElement.className === "sidebar-nav projects-nav"
@@ -36,6 +39,7 @@ export default function addClassList(e) {
     if (!clicked.classList.contains("active-section")) {
       checkClassList();
       clicked.classList.add("active-section");
+      createProjectTitle(e);
     }
   } else if (
     sidebarClicked.parentElement.parentElement.className === "sidebar-nav" ||
@@ -46,6 +50,7 @@ export default function addClassList(e) {
     if (!clicked.classList.contains("active-section")) {
       checkClassList();
       clicked.classList.add("active-section");
+      createProjectTitle(e);
     }
   }
 }

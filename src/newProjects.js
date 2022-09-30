@@ -11,6 +11,7 @@ export function createNewProject() {
     newProjectDiv.classList.add("projects-nav");
 
     const newProject = `
+    <div class="project-text-icon">
       <img
         class="sidebar-icons"
         src="${projectList[i].icon}"

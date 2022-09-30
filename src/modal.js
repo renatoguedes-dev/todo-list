@@ -1,12 +1,32 @@
+import openNewTask from "./newTask";
+import fillProjectModal from "./openProjectModal";
+
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
 const sidebarModalItems = document.querySelectorAll(".modal-sidebar-item");
-const openModalButton = document.querySelector("#newTodoBtn");
+const openProjectButton = document.querySelector("#newProjectBtn");
+const openTaskButton = document.querySelector("#newTaskBtn");
 const closeModalButton = document.querySelector("#modalCloseBtn");
 
-export function openModal() {
+export function removeAllChildNodes(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+}
+
+export function openProjectModal() {
   modal.classList.add("active");
   overlay.classList.add("active");
+  fillProjectModal();
+}
+
+export function openTaskModal() {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+
+  // const modalContent = document.querySelector(".modal-content");
+  // removeAllChildNodes(modalContent);
+  openNewTask();
 }
 
 export function closeModal() {
@@ -31,12 +51,7 @@ export function addModalClassList(e) {
   }
 }
 
-export function removeAllChildNodes(parent) {
-  while (parent.firstChild) {
-    parent.removeChild(parent.firstChild);
-  }
-}
-
 overlay.addEventListener("click", closeModal);
-openModalButton.addEventListener("click", openModal);
+openProjectButton.addEventListener("click", openProjectModal);
+openTaskButton.addEventListener("click", openTaskModal);
 closeModalButton.addEventListener("click", closeModal);

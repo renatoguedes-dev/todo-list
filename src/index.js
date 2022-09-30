@@ -1,8 +1,8 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable comma-dangle */
 /* eslint-disable implicit-arrow-linebreak */
-import { openModal, closeModal } from "./modal";
-import { createNewProject, addProjectToProjects } from "./newproject";
+import { openProjectModal, openTaskModal, closeModal } from "./modal";
+import { createNewProject, addProjectToProjects } from "./newProjects";
 
 const hammerWrench = "./images/projects-icons/wrench-screwdriver-crossed.svg";
 const volleyball = "./images/projects-icons/volleyball-ball.svg";
