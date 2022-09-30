@@ -65,54 +65,24 @@
 
             <div
               data-modal-target="#modal"
-              id="newTodoBtn"
-              class="new-todo-button"
+              id="newProjectBtn"
+              class="new-project-button"
             >
               <p>+</p>
             </div>
           </div>
 
           <div class="projects" id="projects">
-            
             <div class="sidebar-nav projects-nav">
-              <img
-                class="sidebar-icons"
-                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
-                alt="A hammer and a screwdriver crossed"
-              />
-              <p class="project-name">Project 1</p>
-              <div class="project-edit-erase">
-                <img src="./images/note-edit-outline.png" alt="edit icon" />
+              <div class="project-text-icon">
                 <img
-                  src="./images/trash-can-outline.png"
-                  alt="trash can icon"
+                  class="sidebar-icons"
+                  src="./images/projects-icons/wrench-screwdriver-crossed.svg"
+                  alt="A hammer and a screwdriver crossed"
                 />
+                <p class="project-name">Project Test</p>
               </div>
-            </div>
 
-            <div class="sidebar-nav projects-nav">
-              <img
-                class="sidebar-icons"
-                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
-                alt="A hammer and a screwdriver crossed"
-              />
-              <p class="project-name">Project 2</p>
-              <div class="project-edit-erase">
-                <img src="./images/note-edit-outline.png" alt="edit icon" />
-                <img
-                  src="./images/trash-can-outline.png"
-                  alt="trash can icon"
-                />
-              </div>
-            </div>
-
-            <div class="sidebar-nav projects-nav">
-              <img
-                class="sidebar-icons"
-                src="./images/projects-icons/wrench-screwdriver-crossed.svg"
-                alt="A hammer and a screwdriver crossed"
-              />
-              <p class="project-name">Project 3</p>
               <div class="project-edit-erase">
                 <img src="./images/note-edit-outline.png" alt="edit icon" />
                 <img
@@ -132,11 +102,18 @@
             src="./images/calendar-month-outline.svg"
             alt="month calendar"
           />
-          <h1>All</h1>
+          <h1 class="content-title-text">All</h1>
         </div>
         <div class="tasks-div">
           <div class="tasks-title">
             <p>Tasks (<span class="tasks-count">3</span>)</p>
+            <div
+              data-modal-target="#modal"
+              id="newTaskBtn"
+              class="new-task-button"
+            >
+              <p>+</p>
+            </div>
           </div>
 
           <div id="content" class="content">
@@ -269,7 +246,7 @@
 
       <div class="modal" id="modal">
         <div class="modal-header">
-          <h2>Create a new project</h2>
+          <h2 class="modal-header-text">Create a new project</h2>
           <div data-close-button class="modal-close-btn" id="modalCloseBtn">
             &times;
           </div>
