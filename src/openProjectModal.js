@@ -1,4 +1,5 @@
-import { removeAllChildNodes } from "./modal";
+import { removeAllChildNodes, closeModal } from "./modal";
+import { addNewProject, handleIconSelected } from "./newProjects";
 
 function createProjectModal() {
   const modalContent = document.querySelector(".modal-content");
@@ -153,4 +154,13 @@ export default function fillProjectModal() {
   modalHeader.textContent = "Create a new project";
   removeAllChildNodes(modalContent);
   modalBody.appendChild(createProjectModal());
+
+  const addProjectBtn = document.querySelector(".add-project-btn");
+  const selectedProjectIcons = document.querySelectorAll(".project-icon");
+  const cancelModalBtn = document.querySelector(".cancel-modal-btn");
+  cancelModalBtn.addEventListener("click", closeModal);
+  selectedProjectIcons.forEach((selectedProjectIcon) =>
+    selectedProjectIcon.addEventListener("click", handleIconSelected)
+  );
+  addProjectBtn.addEventListener("click", addNewProject);
 }

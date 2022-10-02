@@ -1,4 +1,4 @@
-import openNewTask from "./newTask";
+import openNewTask from "./newTaskButton";
 import fillProjectModal from "./openProjectModal";
 
 const modal = document.getElementById("modal");
@@ -23,9 +23,6 @@ export function openProjectModal() {
 export function openTaskModal() {
   modal.classList.add("active");
   overlay.classList.add("active");
-
-  // const modalContent = document.querySelector(".modal-content");
-  // removeAllChildNodes(modalContent);
   openNewTask();
 }
 
