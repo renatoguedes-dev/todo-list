@@ -7,6 +7,7 @@
   --color-borders: hsl(183, 100%, 40%);
   --color-project-icon: hsl(183, 84%, 34%);
   --color-add-button-hover: hsla(183, 100%, 45%);
+  --color-red-error: hsl(0, 68%, 69%);
 }
 
 * {
@@ -199,10 +200,13 @@ a.select {
 }
 
 .tasks-div {
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   padding: 0 2.5rem;
-  width: clamp(250px, 85% + 1px, 1200px);
+  width: clamp(250px, 92% + 1px, 1200px);
   text-align: left;
+  box-sizing: border-box;
 }
 
 .tasks-title {
@@ -213,14 +217,23 @@ a.select {
   position: relative;
 }
 
+.task-title {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%;
+}
+
 .content {
   background-color: var(--color-bcg);
   padding: 0.2rem 0.7rem;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: minmax(250px, auto) 1fr;
   align-items: center;
   margin-bottom: 1rem;
   min-width: 600px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .content:hover {
@@ -257,6 +270,10 @@ a.select {
 .right-content {
   display: flex;
   gap: 1.2rem;
+}
+
+.right-content {
+  justify-self: end;
 }
 
 .checkbox {
@@ -317,8 +334,6 @@ a.select {
   border: 1px solid black;
   z-index: 10;
   background-color: hsl(214, 32%, 91%);
-  /* height: clamp(350px, 65vh + 1px, 800px); */
-  /* width: clamp(250px, 50vw + 1px, 1000px); */
   overflow: hidden;
 }
 
@@ -349,33 +364,15 @@ a.select {
   color: white;
 }
 
-/* .modal-sidebar {
-  width: max(20%, 100px);
-  height: clamp(15vh, 49vh + 1px, 600px);
-  background-color: var(--color-bcg);
-  color: var(--color-letters);
-  padding: 1.4rem;
-  font-size: 0.5rem;
-  font-size: clamp(0.5rem, 1vmin + 1rem, 25px);
-}
-
-.modal-sidebar li {
-  list-style: none;
-  margin-bottom: 1.2rem;
-  cursor: pointer;
-} */
-
 .modal-body {
   display: flex;
   justify-content: space-between;
   background-color: white;
-  /* height: clamp(15vh, 49vh + 1px, 600px); */
   height: 100%;
 }
 
 .modal-content {
   padding: 1.4rem;
-  /* width: max(80%, 150px); */
   height: 100%;
   width: 100%;
   display: flex;
@@ -393,6 +390,11 @@ a.select {
 .fields label {
   margin-bottom: 0.4rem;
   color: var(--color-letters);
+}
+
+.fields label::after {
+  content: "*";
+  color: var(--color-red-error);
 }
 
 .fields input,
@@ -418,6 +420,16 @@ a.select {
 
 .modal-title-error.hide {
   display: none;
+}
+
+.modal-title-error {
+  color: var(--color-red-error);
+  font-size: 0.9rem;
+  font-size: clamp(
+    0.9rem,
+    0.8400000000000001rem + 0.29999999999999993vw,
+    1.2rem
+  );
 }
 
 .icon-selection {
@@ -629,10 +641,6 @@ a.select {
 }
 
 .active-section {
-  /* font-weight: bold;
-  border-bottom: 2px solid hsl(0, 0%, 30%);
-  width: fit-content;
-  transform: scale(1.2); */
   background-color: var(--color-header-bcg);
   color: white;
 }
