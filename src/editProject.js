@@ -1,7 +1,50 @@
-import { removeAllChildNodes, closeModal } from "./modal";
-import { addNewProject, handleIconSelected } from "./newProjects";
+import { taskList } from "./createNewTask";
+import { closeModal, removeAllChildNodes } from "./modal";
+import {
+  createNewProject,
+  handleIconSelected,
+  projectList,
+} from "./newProjects";
 
-function createProjectModal() {
+let projectName;
+
+function createFilledProject(projectTitle) {
+  let altText;
+  for (let i = 0; i < projectList.length; i++) {
+    if (projectTitle === projectList[i].title) {
+      projectName = projectList[i].title;
+
+      if (
+        projectList[i].icon ===
+        "./images/projects-icons/wrench-screwdriver-crossed.svg"
+      ) {
+        altText = "a wrench and a screwdriver crossed";
+      } else if (projectList[i].icon === "./images/projects-icons/book.svg") {
+        altText = "a book icon";
+      } else if (
+        projectList[i].icon === "./images/projects-icons/money-bag.svg"
+      ) {
+        altText = "a bag of money icon";
+      } else if (
+        projectList[i].icon === "./images/projects-icons/pizza-slice.svg"
+      ) {
+        altText = "a pizza slice icon";
+      } else if (
+        projectList[i].icon === "./images/projects-icons/present-box.svg"
+      ) {
+        altText = "a present box icon";
+      } else if (
+        projectList[i].icon === "./images/projects-icons/volleyball-ball.svg"
+      ) {
+        altText = "a volleyball ball icon";
+      } else if (
+        projectList[i].icon === "./images/projects-icons/dumbbells-exercise.svg"
+      ) {
+        altText = "a person holding two dumbbells icon";
+      }
+    }
+  }
+
   const modalContent = document.querySelector(".modal-content");
 
   // modal-content's first child
@@ -22,6 +65,7 @@ function createProjectModal() {
   input.type = "text";
   input.name = "project-title";
   input.id = "project-title";
+  input.value = projectName;
 
   // fields div's third child
   const paragraphFields = document.createElement("p");
@@ -44,7 +88,6 @@ function createProjectModal() {
   // project-icons div children
   const toolsIcon = document.createElement("div");
   toolsIcon.classList.add("project-icon");
-  toolsIcon.classList.add("active-icon");
 
   const bookIcon = document.createElement("div");
   bookIcon.classList.add("project-icon");
@@ -92,6 +135,22 @@ function createProjectModal() {
   gymIconImg.src = "./images/projects-icons/dumbbells-exercise.svg";
   gymIconImg.alt = "a person holding two dumbbells icon";
 
+  if (altText === toolsIconImg.alt) {
+    toolsIcon.classList.add("active-icon");
+  } else if (altText === bookIconImg.alt) {
+    bookIcon.classList.add("active-icon");
+  } else if (altText === moneyBagIconImg.alt) {
+    moneyBagIcon.classList.add("active-icon");
+  } else if (altText === pizzaIconImg.alt) {
+    pizzaIcon.classList.add("active-icon");
+  } else if (altText === presentBoxIconImg.alt) {
+    presentBoxIcon.classList.add("active-icon");
+  } else if (altText === volleyBallIconImg.alt) {
+    volleyBallIcon.classList.add("active-icon");
+  } else if (altText === gymIconImg.alt) {
+    gymIcon.classList.add("active-icon");
+  }
+
   // modal-content's second child
   const modalButtons = document.createElement("div");
   modalButtons.classList.add("modal-buttons");
@@ -102,7 +161,7 @@ function createProjectModal() {
 
   const addProjectBtn = document.createElement("button");
   addProjectBtn.classList.add("add-project-btn");
-  addProjectBtn.textContent = "Add Project";
+  addProjectBtn.textContent = "Edit Project";
 
   // modal-content div children
   modalContent.appendChild(form);
@@ -146,14 +205,59 @@ function createProjectModal() {
   return modalContent;
 }
 
-export default function fillProjectModal() {
+function editProject() {
+  const projects = document.querySelector("#projects");
+  const title = document.getElementById("project-title").value;
+  let icon = document.getElementsByClassName("active-icon")[0].childNodes[0];
+
+  if (title === "") {
+    const modalTitleError = document.querySelector(".modal-title-error");
+    modalTitleError.classList.remove("hide");
+    return;
+  }
+
+  if (icon.alt === "a wrench and a screwdriver crossed") {
+    icon = "./images/projects-icons/wrench-screwdriver-crossed.svg";
+  } else if (icon.alt === "a book icon") {
+    icon = "./images/projects-icons/book.svg";
+  } else if (icon.alt === "a bag of money icon") {
+    icon = "./images/projects-icons/money-bag.svg";
+  } else if (icon.alt === "a pizza slice icon") {
+    icon = "./images/projects-icons/pizza-slice.svg";
+  } else if (icon.alt === "a present box icon") {
+    icon = "./images/projects-icons/present-box.svg";
+  } else if (icon.alt === "a volleyball ball icon") {
+    icon = "./images/projects-icons/volleyball-ball.svg";
+  } else if (icon.alt === "a person holding two dumbbells icon") {
+    icon = "./images/projects-icons/dumbbells-exercise.svg";
+  }
+
+  // this will match the right project to their tasks and make sure it's all
+  // changed in both objects when edited
+  for (let i = 0; i < projectList.length; i++) {
+    if (projectList[i].title === projectName) {
+      for (let j = 0; j < taskList.length; j++) {
+        if (taskList[j].project === projectName) {
+          projectList[i].title = title;
+          projectList[i].icon = icon;
+          taskList[j].project = title;
+        }
+      }
+    }
+  }
+
+  closeModal();
+  removeAllChildNodes(projects);
+  createNewProject();
+}
+
+export function createEditProject(projectTitle) {
   const modalBody = document.querySelector(".modal-body");
   const modalContent = document.querySelector(".modal-content");
-  const modalHeader = document.querySelector(".modal-header-text");
 
-  modalHeader.textContent = "Create a new project";
   removeAllChildNodes(modalContent);
-  modalBody.appendChild(createProjectModal());
+
+  modalBody.appendChild(createFilledProject(projectTitle));
 
   const selectedProjectIcons = document.querySelectorAll(".project-icon");
   selectedProjectIcons.forEach((selectedProjectIcon) =>
@@ -164,5 +268,12 @@ export default function fillProjectModal() {
   cancelModalBtn.addEventListener("click", closeModal);
 
   const addProjectBtn = document.querySelector(".add-project-btn");
-  addProjectBtn.addEventListener("click", addNewProject);
+  addProjectBtn.addEventListener("click", editProject);
+}
+
+export function openEditProject(projectTitle) {
+  const modalHeader = document.querySelector(".modal-header-text");
+  modalHeader.textContent = "Edit project";
+
+  createEditProject(projectTitle);
 }

@@ -1,5 +1,9 @@
-import openNewTask from "./newTaskButton";
+import { openNewTask } from "./newTask";
 import fillProjectModal from "./openProjectModal";
+import openTaskDetails from "./details";
+import keyPressed from "./keyboardkeys";
+import openEditTask from "./editTask";
+import { openEditProject } from "./editProject";
 
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
@@ -7,6 +11,7 @@ const sidebarModalItems = document.querySelectorAll(".modal-sidebar-item");
 const openProjectButton = document.querySelector("#newProjectBtn");
 const openTaskButton = document.querySelector("#newTaskBtn");
 const closeModalButton = document.querySelector("#modalCloseBtn");
+const editTaskBtn = document.querySelector(".edit-task-button");
 
 export function removeAllChildNodes(parent) {
   while (parent.firstChild) {
@@ -18,12 +23,43 @@ export function openProjectModal() {
   modal.classList.add("active");
   overlay.classList.add("active");
   fillProjectModal();
+  window.addEventListener("keydown", keyPressed);
 }
 
 export function openTaskModal() {
   modal.classList.add("active");
   overlay.classList.add("active");
   openNewTask();
+  window.addEventListener("keydown", keyPressed);
+}
+
+export function openDetailsModal(e) {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+  const taskDetailTitle =
+    e.composedPath()[2].children[0].lastElementChild.innerText;
+
+  openTaskDetails(taskDetailTitle);
+  window.addEventListener("keydown", keyPressed);
+}
+
+export function openEditTaskModal(e) {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+  const taskTitle = e.composedPath()[3].children[0].lastElementChild.innerText;
+
+  openEditTask(taskTitle);
+  window.addEventListener("keydown", keyPressed);
+}
+
+export function openEditProjectModal(e) {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+  const projectTitle =
+    e.composedPath()[2].children[0].lastElementChild.innerText;
+
+  openEditProject(projectTitle);
+  window.addEventListener("keydown", keyPressed);
 }
 
 export function closeModal() {

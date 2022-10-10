@@ -1,5 +1,5 @@
 import { handleSectionSelected, checkClassList } from "./sidebar";
-import { closeModal, removeAllChildNodes } from "./modal";
+import { closeModal, openEditProjectModal, removeAllChildNodes } from "./modal";
 import fillProjectWithTasks from "./selectedProject";
 
 export const projectList = [];
@@ -19,6 +19,36 @@ export function createNewProject() {
   const projects = document.querySelector("#projects");
 
   for (let i = 0; i < projectList.length; i++) {
+    let altText;
+    if (
+      projectList[i].icon ===
+      "./images/projects-icons/wrench-screwdriver-crossed.svg"
+    ) {
+      altText = "a wrench and a screwdriver crossed";
+    } else if (projectList[i].icon === "./images/projects-icons/book.svg") {
+      altText = "a book icon";
+    } else if (
+      projectList[i].icon === "./images/projects-icons/money-bag.svg"
+    ) {
+      altText = "a bag of money icon";
+    } else if (
+      projectList[i].icon === "./images/projects-icons/pizza-slice.svg"
+    ) {
+      altText = "a pizza slice icon";
+    } else if (
+      projectList[i].icon === "./images/projects-icons/present-box.svg"
+    ) {
+      altText = "a present box icon";
+    } else if (
+      projectList[i].icon === "./images/projects-icons/volleyball-ball.svg"
+    ) {
+      altText = "a volleyball ball icon";
+    } else if (
+      projectList[i].icon === "./images/projects-icons/dumbbells-exercise.svg"
+    ) {
+      altText = "a person holding two dumbbells icon";
+    }
+
     const newProjectDiv = document.createElement("div");
     newProjectDiv.classList.add("sidebar-nav");
     newProjectDiv.classList.add("projects-nav");
@@ -28,21 +58,32 @@ export function createNewProject() {
       <img
         class="sidebar-icons"
         src="${projectList[i].icon}"
-        alt="A hammer and a screwdriver crossed"
+        alt="${altText}"
       />
       <p class="project-name">${projectList[i].title}</p>
-      <div class="project-edit-erase">
-        <img src="./images/note-edit-outline.png" alt="edit icon" />
-        <img
-          src="./images/trash-can-outline.png"
-          alt="trash can icon"
-        />
-      </div>`;
+    </div>
+      
+    <div class="project-edit-erase">
+      <img
+        class="edit-project-button"
+        src="./images/note-edit-outline.png"
+        alt="edit icon"
+      />
+      <img
+        class="erase-project-button"
+        src="./images/trash-can-outline.png"
+        alt="trash can icon"
+      />
+    </div>`;
 
     newProjectDiv.innerHTML = newProject;
     projects.appendChild(newProjectDiv);
   }
   projects.addEventListener("click", handleSectionSelected);
+  const editProjectBtns = document.querySelectorAll(".edit-project-button");
+  editProjectBtns.forEach((editProjectBtn) =>
+    editProjectBtn.addEventListener("click", openEditProjectModal)
+  );
 }
 
 let selectedProjectIcons = document.querySelectorAll(".project-icon");
@@ -79,6 +120,7 @@ export function handleIconSelected(e) {
 }
 
 function createProjectTitleOnAdd() {
+  const projects = document.querySelector("#projects");
   const contentTitleText = document.querySelector(".content-title-text");
   contentTitleText.innerText = projects.lastChild.innerText;
 }
@@ -89,14 +131,13 @@ export function addNewProject(e) {
   const projects = document.querySelector("#projects");
 
   const title = document.getElementById("project-title").value;
+  let icon = document.getElementsByClassName("active-icon")[0].childNodes[0];
 
   if (title === "") {
     const modalTitleError = document.querySelector(".modal-title-error");
     modalTitleError.classList.remove("hide");
     return;
   }
-
-  let icon = document.getElementsByClassName("active-icon")[0].childNodes[0];
 
   if (icon.alt === "a wrench and a screwdriver crossed") {
     icon = "./images/projects-icons/wrench-screwdriver-crossed.svg";
@@ -125,5 +166,4 @@ export function addNewProject(e) {
   projects.lastChild.classList.add("active-section");
   createProjectTitleOnAdd();
   fillProjectWithTasks();
-  // console.log(projects.lastChild);
 }

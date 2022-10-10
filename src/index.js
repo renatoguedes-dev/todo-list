@@ -9,6 +9,8 @@ import {
   Project,
 } from "./newProjects";
 import { Task, addTaskToTasks, taskList } from "./createNewTask";
+import startPage from "./startPage";
+import { createTodayDate, createWeekDate } from "./time";
 
 const hammerWrench = "./images/projects-icons/wrench-screwdriver-crossed.svg";
 const volleyball = "./images/projects-icons/volleyball-ball.svg";
@@ -16,17 +18,18 @@ const gymDumbbell = "./images/projects-icons/dumbbells-exercise.svg";
 
 const projectFitness = new Project("Staying Fitness", gymDumbbell);
 const projectWork = new Project("Work hard and get rich", hammerWrench);
+// const dateNow = new Date().toLocaleDateString();
+const dateNow = createTodayDate().toLocaleDateString();
 
 addProjectToProjects(projectFitness);
 addProjectToProjects(projectWork);
-
-createNewProject();
 
 const fitnessTaskOne = new Task(
   "Staying Fitness",
   "Go to the gym",
   "Work out and lift weights at the gym, 3 times a week",
-  "31/12/2022",
+  "25/11/2022",
+  new Date(2022, 10, 25),
   "High"
 );
 
@@ -35,17 +38,21 @@ const fitnessTaskTwo = new Task(
   "Wake up early and run at the street",
   "Run at the street 4 times a week for at least 15 minutes",
   "31/12/2022",
-  "High"
+  new Date(2022, 11, 31),
+  "Medium"
 );
 
 const projectTestTaskOne = new Task(
-  "Project Test",
+  "Work hard and get rich",
   "Create a very nice app",
   "Go on VS Code and build a lot of nice features in javascript",
-  "15/11/2022",
-  "Medium"
+  dateNow,
+  new Date(),
+  "High"
 );
 
 addTaskToTasks(fitnessTaskOne);
 addTaskToTasks(fitnessTaskTwo);
 addTaskToTasks(projectTestTaskOne);
+
+startPage();

@@ -7,7 +7,7 @@
 /* eslint-disable no-plusplus */
 
 import { createProjectTitle } from "./projectContent";
-import fillProjectWithTasks from "./selectedProject";
+import fillPageWithTasks from "./selectedProject";
 
 let sidebarItems = document.querySelectorAll(".sidebar-nav");
 
@@ -32,7 +32,7 @@ export function handleSectionSelected(e) {
     checkClassList();
     sidebarClicked.classList.add("active-section");
     createProjectTitle(e);
-    fillProjectWithTasks();
+    fillPageWithTasks();
   } else if (
     sidebarClicked.parentElement.className === "sidebar-nav" ||
     sidebarClicked.parentElement.className === "sidebar-nav projects-nav"
@@ -42,7 +42,7 @@ export function handleSectionSelected(e) {
       checkClassList();
       clicked.classList.add("active-section");
       createProjectTitle(e);
-      fillProjectWithTasks();
+      fillPageWithTasks();
     }
   } else if (
     sidebarClicked.parentElement.parentElement.className === "sidebar-nav" ||
@@ -50,11 +50,12 @@ export function handleSectionSelected(e) {
       "sidebar-nav projects-nav"
   ) {
     const clicked = sidebarClicked.parentElement.parentElement;
+
     if (!clicked.classList.contains("active-section")) {
       checkClassList();
       clicked.classList.add("active-section");
       createProjectTitle(e);
-      fillProjectWithTasks();
+      fillPageWithTasks();
     }
   }
 }
