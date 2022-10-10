@@ -51,7 +51,7 @@ body {
   color: var(--color-letters);
   padding: 2.5rem 1.5rem;
   font-size: 0.5rem;
-  font-size: clamp(0.5rem, 1vmin + 1rem, 21px);
+  font-size: clamp(0.5rem, 1vmin + 1rem, 18px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -173,7 +173,7 @@ body {
 .main-content {
   width: calc(100vw - 320px);
   flex-basis: 1;
-  font-size: clamp(0.5rem, 1vmin + 1rem, 25px);
+  font-size: clamp(0.5rem, 1vmin + 1rem, 18px);
   color: var(--color-letters);
   overflow: auto;
   text-align: center;
@@ -224,6 +224,10 @@ a.select {
   max-width: 100%;
 }
 
+.completed-task {
+  text-decoration: line-through;
+}
+
 .content {
   background-color: var(--color-bcg);
   padding: 0.2rem 0.7rem;
@@ -240,6 +244,10 @@ a.select {
   transform: scale(1.005);
   box-shadow: 3px 3px 5px 2px hsla(0, 0%, 0%, 0.4);
   transition: all 250ms ease-out;
+}
+
+.content:hover .checkmark {
+  transform: scale(1.005);
 }
 
 .content > * > *,
@@ -276,12 +284,89 @@ a.select {
   justify-self: end;
 }
 
-.checkbox {
+
+/* Customize the label (the container) */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 1rem;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
   height: 1.5rem;
   width: 1.5rem;
   border: 2px solid var(--color-header-bcg);
   border-radius: 5px;
+  background-color: inherit;
 }
+
+
+/* When the checkbox is checked, add a green background */
+.container input:checked ~ .checkmark {
+  background-color: var(--color-header-bcg);
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 6px;
+  top: 2px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* .checkbox {
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid var(--color-header-bcg);
+  border-radius: 5px;
+  display: inline-flex;
+  cursor: pointer;
+  position: relative;
+} */
+
+
+
+/* .checkmark {
+  filter: invert(56%) sepia(76%) saturate(3647%) hue-rotate(148deg) brightness(97%) contrast(101%);
+  scale: 1.5;
+} */
 
 .right-content img,
 .checkbox {
@@ -291,7 +376,7 @@ a.select {
 }
 
 .right-content {
-  font-size: clamp(0.5rem, 1vmin + 1rem, 21px);
+  font-size: clamp(0.5rem, 1vmin + 1rem, 18px);
 }
 
 .detail {
@@ -377,8 +462,8 @@ a.select {
   width: 100%;
   display: flex;
   flex-direction: column;
-  font-size: 1.1rem;
-  font-size: clamp(1.1rem, 1.006rem + 0.47000000000000003vw, 1.57rem);
+  font-size: 0.9rem;
+  font-size: clamp(0.9rem, 0.8300000000000001rem + 0.35vw, 1.25rem);
 }
 
 .modal-content .fields {
@@ -392,7 +477,9 @@ a.select {
   color: var(--color-letters);
 }
 
-.fields label::after {
+.fields label::after,
+.new-date-text::after,
+.priority-text::after {
   content: "*";
   color: var(--color-red-error);
 }
@@ -418,11 +505,14 @@ a.select {
   height: 7rem;
 }
 
-.modal-title-error.hide {
+.hide {
   display: none;
 }
 
-.modal-title-error {
+.modal-title-error,
+.modal-details-error,
+.modal-date-error,
+.modal-priority-error {
   color: var(--color-red-error);
   font-size: 0.9rem;
   font-size: clamp(
@@ -430,6 +520,7 @@ a.select {
     0.8400000000000001rem + 0.29999999999999993vw,
     1.2rem
   );
+  margin-top: 0.3rem;
 }
 
 .icon-selection {
@@ -485,7 +576,7 @@ a.select {
 
 .add-project-btn {
   padding: 0.7rem 1rem;
-  font-size: 20px;
+  font-size: inherit;
   background-color: var(--color-header-bcg);
   color: rgb(255, 255, 255);
   border-radius: 5px;
@@ -505,7 +596,7 @@ a.select {
   border: 1px solid var(--color-letters);
   cursor: pointer;
   margin-right: 0.5rem;
-  font-size: 20px;
+  font-size: inherit;
 }
 
 .cancel-modal-btn:hover {
@@ -518,7 +609,7 @@ a.select {
 }
 
 .new-todo-date {
-  display: flex;
+  /* display: flex; */
   align-items: center;
   margin-bottom: 2rem;
 }
@@ -529,16 +620,11 @@ a.select {
 }
 
 .new-todo-date input {
-  font-size: 22px;
+  font-size: 20px;
   border-color: var(--color-bcg);
   color: var(--color-letters);
   border-radius: 5px;
 }
-
-/* .priority-line {
-  display: flex;
-  justify-content: space-between;
-} */
 
 .priority {
   display: flex;
@@ -559,10 +645,11 @@ a.select {
 .low,
 .medium,
 .high {
-  padding: 0.2rem 1rem;
+  padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
-  height: max();
+  font-weight: 500;
+  /* height: max(); */
 }
 
 .low {
@@ -576,12 +663,12 @@ a.select {
 }
 
 .medium {
-  border: 2px solid rgba(253, 228, 1, 0.993);
-  color: rgb(253, 207, 1);
+  border: 2px solid rgb(253, 175, 1);
+  color: rgb(253, 175, 1);
 }
 
 .medium:hover {
-  background-color: rgb(253, 207, 1);
+  background-color: rgb(253, 175, 1);
   color: white;
 }
 
@@ -595,10 +682,25 @@ a.select {
   color: white;
 }
 
+.low.priority-buttons.active-priority {
+  background-color: var(--color-borders);
+  color: white;
+}
+
+.medium.priority-buttons.active-priority {
+  background-color: rgb(253, 175, 1);
+  color: white;
+}
+
+.high.priority-buttons.active-priority {
+  background-color: red;
+  color: white;
+}
+
 .add-todo-btn {
   background-color: var(--color-header-bcg);
   color: rgb(255, 255, 255);
-  padding: 1rem;
+  padding: 0.7rem 1rem;
   border-radius: 5px;
   border: none;
   cursor: pointer;
@@ -650,4 +752,30 @@ a.select {
   /* white color icon when active */
   filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(142deg)
     brightness(109%) contrast(101%);
+}
+
+.details-divs {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  border-bottom: 1px solid lightgray;
+  padding: 1.5rem 0;
+  width: clamp(300px, 30vw, 600px);
+}
+
+.details-divs:first-child {
+  padding-top: 0.5rem;
+}
+
+.details-divs:last-child {
+  border-bottom: none;
+}
+
+.details-left-column {
+  color: var(--color-letters);
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.details-right-column {
+  color: var(--color-letters);
 }

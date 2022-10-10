@@ -19,7 +19,7 @@
     <main id="main" class="main">
       <div class="sidebar" id="sidebar">
         <div>
-          <div class="sidebar-nav">
+          <div class="sidebar-nav active-section">
             <div class="sidebar-link">
               <img
                 class="sidebar-icons"
@@ -60,6 +60,17 @@
             <p>Important</p>
           </div>
 
+          <div class="sidebar-nav">
+            <div class="sidebar-link">
+              <img
+                src="./images/calendar-check-outline.png"
+                alt="calendar with checkmark"
+                class="sidebar-icons"
+              />
+            </div>
+            <p>Completed</p>
+          </div>
+
           <div class="projects-line">
             <div class="projects-title" id="projectsTitle">Projects</div>
 
@@ -84,8 +95,13 @@
               </div>
 
               <div class="project-edit-erase">
-                <img src="./images/note-edit-outline.png" alt="edit icon" />
                 <img
+                  class="edit-project-button"
+                  src="./images/note-edit-outline.png"
+                  alt="edit icon"
+                />
+                <img
+                  class="erase-project-button"
                   src="./images/trash-can-outline.png"
                   alt="trash can icon"
                 />
@@ -118,15 +134,24 @@
 
           <div id="content" class="content">
             <div class="left-content">
-              <div class="checkbox"></div>
+              <label class="container">
+                <input type="checkbox" class="checkbox" name="checkbox" />
+                <span class="checkmark"></span>
+              </label>
+
               <p>example of content</p>
             </div>
             <div class="right-content">
               <div class="detail">Details</div>
               <div class="due-date">Aug 30th</div>
               <div class="images">
-                <img src="./images/note-edit-outline.png" alt="edit icon" />
                 <img
+                  class="edit-task-button"
+                  src="./images/note-edit-outline.png"
+                  alt="edit icon"
+                />
+                <img
+                  class="erase-task-button"
                   src="./images/trash-can-outline.png"
                   alt="trash can icon"
                 />
