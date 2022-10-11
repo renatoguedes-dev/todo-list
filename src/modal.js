@@ -4,6 +4,8 @@ import openTaskDetails from "./details";
 import keyPressed from "./keyboardkeys";
 import openEditTask from "./editTask";
 import { openEditProject } from "./editProject";
+import { openEraseProject } from "./eraseProject";
+import { openEraseTask } from "./eraseTask";
 
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
@@ -59,6 +61,25 @@ export function openEditProjectModal(e) {
     e.composedPath()[2].children[0].lastElementChild.innerText;
 
   openEditProject(projectTitle);
+  window.addEventListener("keydown", keyPressed);
+}
+
+export function openEraseProjectModal(e) {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+  const projectTitle =
+    e.composedPath()[2].children[0].lastElementChild.innerText;
+
+  openEraseProject(projectTitle);
+  window.addEventListener("keydown", keyPressed);
+}
+
+export function openEraseTaskModal(e) {
+  modal.classList.add("active");
+  overlay.classList.add("active");
+  const taskTitle = e.composedPath()[3].children[0].lastElementChild.innerText;
+
+  openEraseTask(taskTitle);
   window.addEventListener("keydown", keyPressed);
 }
 

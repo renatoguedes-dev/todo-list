@@ -177,9 +177,14 @@ export function handlePrioritySelected(e) {
 export function openNewTask() {
   const modalBody = document.querySelector(".modal-body");
   const modalContent = document.querySelector(".modal-content");
-  const modalHeader = document.querySelector(".modal-header-text");
+  const modalHeaderText = document.querySelector(".modal-header-text");
+  const modalHeader = document.querySelector(".modal-header");
 
-  modalHeader.textContent = "Create a new task";
+  if (modalHeader.classList.contains("delete-modal-header")) {
+    modalHeader.classList.remove("delete-modal-header");
+  }
+
+  modalHeaderText.textContent = "Create a new task";
   removeAllChildNodes(modalContent);
   modalBody.appendChild(createNewTask());
 

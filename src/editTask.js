@@ -496,9 +496,14 @@ function createEditTask(taskTitle) {
 }
 
 export default function openEditTask(taskTitle) {
-  const modalHeader = document.querySelector(".modal-header-text");
+  const modalHeaderText = document.querySelector(".modal-header-text");
+  const modalHeader = document.querySelector(".modal-header");
 
-  modalHeader.textContent = "Edit task";
+  if (modalHeader.classList.contains("delete-modal-header")) {
+    modalHeader.classList.remove("delete-modal-header");
+  }
+
+  modalHeaderText.textContent = "Edit Task";
 
   createEditTask(taskTitle);
 }

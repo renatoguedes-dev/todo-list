@@ -1,5 +1,10 @@
 import { taskList } from "./createNewTask";
-import { openTaskModal, openDetailsModal, openEditTaskModal } from "./modal";
+import {
+  openTaskModal,
+  openDetailsModal,
+  openEditTaskModal,
+  openEraseTaskModal,
+} from "./modal";
 import { contentTitleText } from "./projectContent";
 import { createMonthDate, createTodayDate, createWeekDate } from "./time";
 
@@ -447,9 +452,6 @@ function createAddTaskButton() {
 function toggleCheckmark(e) {
   const taskClicked = e.composedPath()[2].children[1];
   const checkboxCheck = e.composedPath()[0].checked;
-  console.log(e.composedPath());
-  console.log(taskClicked);
-  console.log(checkboxCheck);
 
   for (let i = 0; i < taskList.length; i++) {
     if (taskClicked.textContent === taskList[i].title) {
@@ -476,6 +478,11 @@ export default function fillPageWithTasks() {
     removeChildNodesExceptFirst(tasksTitle);
     createTaskListForDates();
 
+    const checkboxes = document.querySelectorAll(".checkbox");
+    checkboxes.forEach((checkbox) =>
+      checkbox.addEventListener("click", toggleCheckmark)
+    );
+
     const details = document.querySelectorAll(".detail");
     details.forEach((detail) =>
       detail.addEventListener("click", openDetailsModal)
@@ -486,13 +493,18 @@ export default function fillPageWithTasks() {
       editTasks.addEventListener("click", openEditTaskModal)
     );
 
-    const checkboxes = document.querySelectorAll(".checkbox");
-    checkboxes.forEach((checkbox) =>
-      checkbox.addEventListener("click", toggleCheckmark)
+    const eraseTaskBtn = document.querySelectorAll(".erase-task-button");
+    eraseTaskBtn.forEach((eraseTask) =>
+      eraseTask.addEventListener("click", openEraseTaskModal)
     );
   }
 
   createTaskListForProject();
+
+  const checkboxes = document.querySelectorAll(".checkbox");
+  checkboxes.forEach((checkbox) =>
+    checkbox.addEventListener("click", toggleCheckmark)
+  );
 
   const details = document.querySelectorAll(".detail");
   details.forEach((detail) =>
@@ -504,9 +516,9 @@ export default function fillPageWithTasks() {
     editTasks.addEventListener("click", openEditTaskModal)
   );
 
-  const checkboxes = document.querySelectorAll(".checkbox");
-  checkboxes.forEach((checkbox) =>
-    checkbox.addEventListener("click", toggleCheckmark)
+  const eraseTaskBtn = document.querySelectorAll(".erase-task-button");
+  eraseTaskBtn.forEach((eraseTask) =>
+    eraseTask.addEventListener("click", openEraseTaskModal)
   );
 
   updateTasksCount();

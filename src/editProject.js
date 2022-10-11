@@ -272,8 +272,14 @@ export function createEditProject(projectTitle) {
 }
 
 export function openEditProject(projectTitle) {
-  const modalHeader = document.querySelector(".modal-header-text");
-  modalHeader.textContent = "Edit project";
+  const modalHeaderText = document.querySelector(".modal-header-text");
+  modalHeaderText.textContent = "Edit Project";
+
+  const modalHeader = document.querySelector(".modal-header");
+
+  if (modalHeader.classList.contains("delete-modal-header")) {
+    modalHeader.classList.remove("delete-modal-header");
+  }
 
   createEditProject(projectTitle);
 }

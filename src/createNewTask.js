@@ -2,7 +2,7 @@ import { closeModal } from "./modal";
 import { contentTitleText } from "./projectContent";
 import fillPageWithTasks from "./selectedProject";
 
-export const taskList = [];
+export let taskList = [];
 
 export class Task {
   constructor(project, title, details, date, fullDate, priority) {
@@ -17,6 +17,12 @@ export class Task {
 
 export function addTaskToTasks(task) {
   taskList.push(task);
+}
+
+export function updateTaskList(updatedTaskList) {
+  taskList = updatedTaskList.map((x) => x);
+  console.log(taskList);
+  
 }
 
 export function addNewTask(e) {

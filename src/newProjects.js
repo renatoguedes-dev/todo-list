@@ -1,8 +1,13 @@
 import { handleSectionSelected, checkClassList } from "./sidebar";
-import { closeModal, openEditProjectModal, removeAllChildNodes } from "./modal";
+import {
+  closeModal,
+  openEditProjectModal,
+  openEraseProjectModal,
+  removeAllChildNodes,
+} from "./modal";
 import fillProjectWithTasks from "./selectedProject";
 
-export const projectList = [];
+export let projectList = [];
 
 export class Project {
   constructor(title, icon) {
@@ -11,40 +16,44 @@ export class Project {
   }
 }
 
+export function updateProjectList(updatedProjectList) {
+  projectList = updatedProjectList.map((x) => x);
+}
+
 export function addProjectToProjects(project) {
   projectList.push(project);
 }
 
-export function createNewProject() {
+export function createNewProject(projectArray) {
   const projects = document.querySelector("#projects");
 
-  for (let i = 0; i < projectList.length; i++) {
+  for (let i = 0; i < projectArray.length; i++) {
     let altText;
     if (
-      projectList[i].icon ===
+      projectArray[i].icon ===
       "./images/projects-icons/wrench-screwdriver-crossed.svg"
     ) {
       altText = "a wrench and a screwdriver crossed";
-    } else if (projectList[i].icon === "./images/projects-icons/book.svg") {
+    } else if (projectArray[i].icon === "./images/projects-icons/book.svg") {
       altText = "a book icon";
     } else if (
-      projectList[i].icon === "./images/projects-icons/money-bag.svg"
+      projectArray[i].icon === "./images/projects-icons/money-bag.svg"
     ) {
       altText = "a bag of money icon";
     } else if (
-      projectList[i].icon === "./images/projects-icons/pizza-slice.svg"
+      projectArray[i].icon === "./images/projects-icons/pizza-slice.svg"
     ) {
       altText = "a pizza slice icon";
     } else if (
-      projectList[i].icon === "./images/projects-icons/present-box.svg"
+      projectArray[i].icon === "./images/projects-icons/present-box.svg"
     ) {
       altText = "a present box icon";
     } else if (
-      projectList[i].icon === "./images/projects-icons/volleyball-ball.svg"
+      projectArray[i].icon === "./images/projects-icons/volleyball-ball.svg"
     ) {
       altText = "a volleyball ball icon";
     } else if (
-      projectList[i].icon === "./images/projects-icons/dumbbells-exercise.svg"
+      projectArray[i].icon === "./images/projects-icons/dumbbells-exercise.svg"
     ) {
       altText = "a person holding two dumbbells icon";
     }
@@ -84,6 +93,11 @@ export function createNewProject() {
   editProjectBtns.forEach((editProjectBtn) =>
     editProjectBtn.addEventListener("click", openEditProjectModal)
   );
+
+  const eraseProjectBtns = document.querySelectorAll(".erase-project-button");
+  eraseProjectBtns.forEach((eraseProjectBtn) =>
+    eraseProjectBtn.addEventListener("click", openEraseProjectModal)
+  );
 }
 
 let selectedProjectIcons = document.querySelectorAll(".project-icon");
@@ -119,10 +133,13 @@ export function handleIconSelected(e) {
   }
 }
 
-function createProjectTitleOnAdd() {
+function createProjectTitleOnAdd(icon) {
   const projects = document.querySelector("#projects");
   const contentTitleText = document.querySelector(".content-title-text");
+  const contentTitleImg = document.querySelector(".content-title-img");
+
   contentTitleText.innerText = projects.lastChild.innerText;
+  contentTitleImg.src = icon;
 }
 
 export function addNewProject(e) {
@@ -160,10 +177,10 @@ export function addNewProject(e) {
   addProjectToProjects(projectAdded);
   closeModal();
   removeAllChildNodes(projects);
-  createNewProject();
+  createNewProject(projectList);
 
   checkClassList();
   projects.lastChild.classList.add("active-section");
-  createProjectTitleOnAdd();
+  createProjectTitleOnAdd(icon);
   fillProjectWithTasks();
 }
