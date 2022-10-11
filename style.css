@@ -8,6 +8,7 @@
   --color-project-icon: hsl(183, 84%, 34%);
   --color-add-button-hover: hsla(183, 100%, 45%);
   --color-red-error: hsl(0, 68%, 69%);
+  --color-red-error-hover: hsla(0, 68%, 60%);
 }
 
 * {
@@ -284,7 +285,6 @@ a.select {
   justify-self: end;
 }
 
-
 /* Customize the label (the container) */
 .container {
   display: block;
@@ -319,7 +319,6 @@ a.select {
   border-radius: 5px;
   background-color: inherit;
 }
-
 
 /* When the checkbox is checked, add a green background */
 .container input:checked ~ .checkmark {
@@ -360,8 +359,6 @@ a.select {
   cursor: pointer;
   position: relative;
 } */
-
-
 
 /* .checkmark {
   filter: invert(56%) sepia(76%) saturate(3647%) hue-rotate(148deg) brightness(97%) contrast(101%);
@@ -588,7 +585,28 @@ a.select {
   background-color: var(--color-add-button-hover);
 }
 
-.cancel-modal-btn {
+.delete-project-btn,
+.delete-task-btn {
+  padding: 0.7rem 1rem;
+  font-size: inherit;
+  background-color: var(--color-red-error);
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.delete-project-btn:hover,
+.delete-task-btn:hover {
+  background-color: var(--color-red-error-hover);
+}
+
+.delete-modal-header {
+  background-color: var(--color-red-error);
+}
+
+.cancel-modal-btn,
+.cancel-delete-modal-btn {
   background-color: white;
   color: var(--color-letters);
   padding: 0.7rem 1rem;
@@ -602,6 +620,26 @@ a.select {
 .cancel-modal-btn:hover {
   border: 1px solid var(--color-header-bcg);
   color: var(--color-header-bcg);
+}
+
+.cancel-delete-modal-btn:hover {
+  border: 1px solid var(--color-red-error);
+  color: var(--color-red-error);
+}
+
+.project-name-deletion,
+.task-name-deletion {
+  font-weight: bold;
+}
+
+.erase-project-text,
+.erase-task-text {
+  color: var(--color-letters);
+}
+
+.erase-project-text :first-child,
+.erase-task-text :first-child {
+  margin-bottom: 2rem;
 }
 
 #new-todo-details {
