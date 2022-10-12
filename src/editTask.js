@@ -453,7 +453,6 @@ function editTask() {
       taskList[i].date = taskDueDate;
       taskList[i].fullDate = taskFullDueDate;
       taskList[i].priority = priority;
-      console.log(taskList[i]);
     }
   }
 

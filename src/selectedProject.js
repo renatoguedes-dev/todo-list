@@ -456,7 +456,6 @@ function toggleCheckmark(e) {
   for (let i = 0; i < taskList.length; i++) {
     if (taskClicked.textContent === taskList[i].title) {
       taskList[i].checked = checkboxCheck;
-      console.log(taskList[i]);
       fillPageWithTasks();
     }
   }
