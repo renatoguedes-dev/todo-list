@@ -3,7 +3,8 @@
 :root {
   --color-letters: hsl(0, 0%, 30%);
   --color-bcg: hsl(0, 0%, 96%);
-  --color-header-bcg: hsl(183, 100%, 37%);
+  --color-menu-bcg: hsl(183, 100%, 35%);
+  --color-header-bcg: hsl(183, 100%, 40%);
   --color-borders: hsl(183, 100%, 40%);
   --color-project-icon: hsl(183, 84%, 34%);
   --color-add-button-hover: hsla(183, 100%, 45%);
@@ -34,11 +35,57 @@ body {
 
 .header {
   background-color: var(--color-header-bcg);
-  height: 8vh;
+  height: 80px;
   display: flex;
   align-items: center;
   padding-left: 3rem;
   color: white;
+}
+
+.menu-btn {
+  position: relative;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.5s ease-in-out;
+  border-radius: 5px;
+  background-color: var(--color-menu-bcg);
+  margin-right: 2rem;
+}
+
+.menu-burger {
+  width: 25px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--color-bcg);
+  transition: all 0.5s ease-in-out;
+}
+
+.menu-burger::before {
+  transform: translateY(-8px);
+}
+
+.menu-burger::after {
+  transform: translateY(8px);
+}
+
+.menu-btn.open .menu-burger:nth-child(2) {
+  background: transparent;
+}
+
+.menu-btn.open .menu-burger:first-child {
+  transform: rotate(45deg) translate(6px, 6px);
+  width: 28px;
+}
+
+.menu-btn.open .menu-burger:last-child {
+  transform: rotate(-45deg) translate(5.5px, -5.5px);
+  width: 28px;
 }
 
 .header img {
@@ -56,6 +103,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  height: calc(100% - 80px);
 }
 
 .sidebar-icons,
@@ -816,4 +864,72 @@ a.select {
 
 .details-right-column {
   color: var(--color-letters);
+}
+
+@media screen and (max-width: 1000px) {
+  .menu-btn {
+    display: flex;
+  }
+
+  #sidebar {
+    transition: all 300ms ease-in-out;
+    transform: translateX(-100%);
+    position: absolute;
+  }
+
+  #sidebar.menu-active {
+    transform: translateX(0);
+    z-index: 4;
+  }
+
+  .footer {
+    display: none;
+  }
+
+  .main-content {
+    width: 100vw;
+  }
+
+  #menu-overlay {
+    position: fixed;
+    opacity: 0;
+    transition: 500ms ease-in-out;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(5px);
+  }
+  
+  #menu-overlay.menu-active {
+    pointer-events: all;
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .tasks-div {
+    padding: 0;
+
+  }
+
+  .modal {
+    width: 90%;
+  }
+
+  .main-content,
+  .right-content {
+    font-size: 0.9rem;
+    font-size: clamp(0.9rem, 0.88rem + 0.09999999999999998vw, 1rem);
+  }
+
+  .content {
+    grid-template-columns: 200px 1fr;
+    min-width: 500px;
+  }
+
+  .right-content {
+    justify-self: flex-start;
 }
