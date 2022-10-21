@@ -6,10 +6,12 @@
 /* eslint-disable eqeqeq */
 /* eslint-disable no-plusplus */
 
+import toggleMenu from "./menuBtn";
 import { createProjectTitle } from "./projectContent";
 import fillPageWithTasks from "./selectedProject";
 
 let sidebarItems = document.querySelectorAll(".sidebar-nav");
+const menuBtn = document.querySelector(".menu-btn");
 
 export function checkClassList() {
   sidebarItems = document.querySelectorAll(".sidebar-nav");
@@ -57,6 +59,10 @@ export function handleSectionSelected(e) {
       createProjectTitle(e);
       fillPageWithTasks();
     }
+  }
+
+  if (menuBtn.classList.contains("open")) {
+    toggleMenu();
   }
 }
 

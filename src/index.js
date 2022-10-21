@@ -1,6 +1,7 @@
 /* eslint-disable function-paren-newline */
 /* eslint-disable comma-dangle */
 /* eslint-disable implicit-arrow-linebreak */
+import toggleMenu from "./menuBtn";
 import { openProjectModal, openTaskModal, closeModal } from "./modal";
 import {
   createNewProject,
@@ -18,7 +19,6 @@ const gymDumbbell = "./images/projects-icons/dumbbells-exercise.svg";
 
 const projectFitness = new Project("Staying Fitness", gymDumbbell);
 const projectWork = new Project("Work hard and get rich", hammerWrench);
-// const dateNow = new Date().toLocaleDateString();
 const dateNow = createTodayDate().toLocaleDateString();
 
 addProjectToProjects(projectFitness);

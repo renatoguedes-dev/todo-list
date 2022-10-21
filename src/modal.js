@@ -6,6 +6,7 @@ import openEditTask from "./editTask";
 import { openEditProject } from "./editProject";
 import { openEraseProject } from "./eraseProject";
 import { openEraseTask } from "./eraseTask";
+import toggleMenu from "./menuBtn";
 
 const modal = document.getElementById("modal");
 const overlay = document.getElementById("overlay");
@@ -14,6 +15,7 @@ const openProjectButton = document.querySelector("#newProjectBtn");
 const openTaskButton = document.querySelector("#newTaskBtn");
 const closeModalButton = document.querySelector("#modalCloseBtn");
 const editTaskBtn = document.querySelector(".edit-task-button");
+const menuBtn = document.querySelector(".menu-btn");
 
 export function removeAllChildNodes(parent) {
   while (parent.firstChild) {
@@ -22,6 +24,9 @@ export function removeAllChildNodes(parent) {
 }
 
 export function openProjectModal() {
+  if (menuBtn.classList.contains("open")) {
+    toggleMenu();
+  }
   modal.classList.add("active");
   overlay.classList.add("active");
   fillProjectModal();
