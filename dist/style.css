@@ -103,7 +103,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: calc(100% - 80px);
+  /* height: calc(100% - 80px); */
 }
 
 .sidebar-icons,
@@ -875,6 +875,7 @@ a.select {
     transition: all 300ms ease-in-out;
     transform: translateX(-100%);
     position: absolute;
+    height: calc(100% - 80px);
   }
 
   #sidebar.menu-active {
@@ -902,7 +903,7 @@ a.select {
     background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
   }
-  
+
   #menu-overlay.menu-active {
     pointer-events: all;
     opacity: 1;
@@ -912,7 +913,6 @@ a.select {
 @media screen and (max-width: 750px) {
   .tasks-div {
     padding: 0;
-
   }
 
   .modal {
@@ -932,4 +932,5 @@ a.select {
 
   .right-content {
     justify-self: flex-start;
+  }
 }
