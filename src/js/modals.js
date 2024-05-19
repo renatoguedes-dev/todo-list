@@ -12,7 +12,7 @@ export function removeAllChildNodes(parent) {
     }
 }
 
-export default function openModal(e) {
+export function openModal(e) {
     const target = e.currentTarget.id
     modal.classList.toggle("active")
     overlay.classList.toggle("active")

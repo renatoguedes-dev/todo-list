@@ -8,6 +8,8 @@ import {
     createButtonElement,
     appendChildren,
 } from "./helperFunctions"
+import { createProject, selectCreatedProject } from "./newProject"
+import displayProjects from "./displayProjects"
 
 export default function createProjectModal() {
     const modalContent = document.querySelector(".modal-content")
@@ -75,13 +77,41 @@ export default function createProjectModal() {
     // Create modal buttons div
     const modalButtons = createDivElement("modal-buttons")
     const cancelModalBtn = createButtonElement("Cancel", "cancel-modal-btn")
-    cancelModalBtn.addEventListener("click", closeModal)
-
     const addProjectBtn = createButtonElement("Add Project", "add-project-btn")
 
     appendChildren(modalButtons, cancelModalBtn, addProjectBtn)
 
     modalContent.appendChild(modalButtons)
 
+    cancelModalBtn.addEventListener("click", closeModal)
+    addProjectBtn.addEventListener("click", addNewProject)
+    const projectIconDiv = document.querySelectorAll(".project-icon")
+    projectIconDiv.forEach((div) => {
+        div.addEventListener("click", handleIcons)
+    })
+    
+
     return modalContent
+}
+
+function handleIcons(e) {
+    const targetBar = e.currentTarget
+    const projectIconDiv = document.querySelectorAll(".project-icon")
+    projectIconDiv.forEach((div) => {
+        div.classList.toggle("active-icon", div === targetBar)
+    })
+}
+
+export function addNewProject() {
+    const projectTitle = document.querySelector("#project-title")
+    const selectedIcon = document.querySelector(".project-icon.active-icon")
+    const title = projectTitle.value
+    const selectedIconAlt = selectedIcon.children[0].alt
+    const icon = projectIcons.find((icon) => icon.alt === selectedIconAlt)
+
+    createProject(title, icon)
+    closeModal()
+    displayProjects()
+    selectCreatedProject()
+    
 }

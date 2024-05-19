@@ -1,5 +1,6 @@
 import { Task } from "./newTask"
 import { projectIcons } from "./images"
+import { displayTasks } from "./displayTasks"
 
 export const projectList = []
 
@@ -42,4 +43,14 @@ export function createTemplateProject() {
             createProject("Staying Fitness", icon)
         }
     })
+}
+
+export function selectCreatedProject() {
+    const sidebarNavs = document.querySelectorAll(".sidebar-nav")
+    const projectNavs = document.querySelectorAll(".projects-nav")
+    const lastProjectNav = projectNavs[projectNavs.length - 1]
+    sidebarNavs.forEach((sidebar) => {
+        sidebar.classList.toggle("active-section", sidebar === lastProjectNav)
+    })
+    displayTasks(lastProjectNav)
 }

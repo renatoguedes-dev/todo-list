@@ -11,10 +11,39 @@ export class Task {
         this.priority = priority
         this.completed = false
     }
+
+    // Method to toggle task completion status
+    toggleCompleted() {
+        this.completed = !this.completed
+    }
 }
 
 export function addTaskToTaskList(task) {
     taskList.push(task)
+}
+
+// Function to update task status in both taskList and project tasks
+export function updateTaskCompletion(task) {
+    // Update the task in the taskList
+    const taskInList = taskList.find(t => t === task)
+    if (taskInList) {
+        taskInList.completed = task.completed
+    }
+
+    // Update the task in the respective project's task list
+    const project = projectList.find(p => p.title === task.project)
+    if (project) {
+        const taskInProject = project.tasks.find(t => t === task)
+        if (taskInProject) {
+            taskInProject.completed = task.completed
+        }
+    }
+}
+
+// Function to toggle task completion status in both taskList and project tasks
+export function toggleTaskCompletion(task) {
+    task.toggleCompleted()
+    updateTaskCompletion(task)
 }
 
 export function createTask(project, title, description, date, priority) {
@@ -32,8 +61,8 @@ export function createTemplateTask() {
                 project,
                 "Go to the gym",
                 "Work out and lift weights at the gym, 3 times a week",
-                "18-05-2024",
-                "Low"
+                "19-05-2024",
+                "High"
             )
         }
     }
