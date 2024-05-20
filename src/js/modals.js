@@ -3,8 +3,8 @@ import createProjectModal from "./createProjectModal"
 import createTaskModal from "./createTaskModal"
 
 const modal = document.querySelector("#modal")
-const modalCloseBtn = document.querySelector("#modalCloseBtn")
 const overlay = document.querySelector("#overlay")
+const modalCloseBtn = document.querySelector("#modalCloseBtn")
 
 export function removeAllChildNodes(parent) {
     while (parent.firstChild) {
@@ -30,6 +30,8 @@ export function closeModal() {
     modal.classList.remove("active")
     overlay.classList.remove("active")
 }
+
+
 
 modalCloseBtn.addEventListener("click", closeModal)
 overlay.addEventListener("click", closeModal)

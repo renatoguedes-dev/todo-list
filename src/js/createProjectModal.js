@@ -13,6 +13,8 @@ import displayProjects from "./displayProjects"
 
 export default function createProjectModal() {
     const modalContent = document.querySelector(".modal-content")
+    const modalHeaderDiv = document.querySelector(".modal-header")
+    modalHeaderDiv.classList.remove("delete-modal-header")
     const modalHeader = document.querySelector(".modal-header-text")
     modalHeader.textContent = "Create a new project"
     removeAllChildNodes(modalContent)
@@ -94,7 +96,7 @@ export default function createProjectModal() {
     return modalContent
 }
 
-function handleIcons(e) {
+export function handleIcons(e) {
     const targetBar = e.currentTarget
     const projectIconDiv = document.querySelectorAll(".project-icon")
     projectIconDiv.forEach((div) => {
@@ -115,3 +117,5 @@ export function addNewProject() {
     selectCreatedProject()
     
 }
+
+

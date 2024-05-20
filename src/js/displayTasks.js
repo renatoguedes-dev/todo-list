@@ -35,6 +35,7 @@ function createTasksDiv(taskList, target) {
     let filteredTasks = []
     let icon = null
     let title = target
+    let project = null
 
     switch (target) {
         case "All":
@@ -69,7 +70,7 @@ function createTasksDiv(taskList, target) {
             setupEventListeners()
             return
         default: {
-            const project = projectList.find((p) => p.title === target)
+            project = projectList.find((p) => p.title === target)
             if (project) {
                 filteredTasks = taskList.filter(
                     (task) =>
@@ -92,7 +93,12 @@ function createTasksDiv(taskList, target) {
         `
     }
 
-    appendTasksTitle(tasksDiv, filteredTasks.length)
+    if (project) {
+        appendTasksTitle(tasksDiv, filteredTasks.length)
+    } else {
+        appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
+    }
+
     filteredTasks.forEach((task) =>
         appendChildren(tasksDiv, createTaskContent(task))
     )
@@ -102,7 +108,9 @@ function createTasksDiv(taskList, target) {
 
 function setupEventListeners() {
     const newTaskBtn = document.querySelector("#newTaskBtn")
-    newTaskBtn.addEventListener("click", openModal)
+    if (newTaskBtn) {
+        newTaskBtn.addEventListener("click", openModal)
+    }
     const checkboxes = document.querySelectorAll(".checkbox")
     checkboxes.forEach((checkbox) =>
         checkbox.addEventListener("click", toggleCheckmark)
@@ -121,7 +129,7 @@ export function createStartingTasksDiv() {
     let filteredTasks = []
     filteredTasks = taskList.filter((task) => !task.completed)
 
-    appendTasksTitle(tasksDiv, filteredTasks.length)
+    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
     taskList
         .filter((task) => !task.completed)
         .forEach((task) => appendChildren(tasksDiv, createTaskContent(task)))
@@ -138,6 +146,15 @@ function appendTasksTitle(tasksDiv, taskCount) {
         <div data-modal-target="#modal" id="newTaskBtn" class="new-task-button">
             <p>+</p>
         </div>
+    `
+    appendChildren(tasksDiv, taskTitle)
+}
+
+function appendTasksTitleWithoutTaskBtn(tasksDiv, taskCount) {
+    const taskTitle = createDivElement("tasks-title")
+    taskTitle.id = "tasksTitle"
+    taskTitle.innerHTML = `
+        <p>Tasks (<span class="tasks-count">${taskCount}</span>)</p>
     `
     appendChildren(tasksDiv, taskTitle)
 }
@@ -175,7 +192,7 @@ export function createCompletedTasksDiv(icon, title, filteredTasks) {
             <h1 class="content-title-text">${title}</h1>
         `
 
-    appendTasksTitle(tasksDiv, filteredTasks.length)
+    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
     taskList
         .filter((task) => task.completed)
         .forEach((task) =>

@@ -1,13 +1,8 @@
 import displayProjects from "./displayProjects"
 import { createStartingTasksDiv } from "./displayTasks"
-import { icons, projectIcons } from "./images"
+import { projectIcons } from "./images"
 import { createProject, createTemplateProject, projectList } from "./newProject"
-import {
-    createTask,
-    createTemplateTask,
-    taskList,
-    toggleTaskCompletion,
-} from "./newTask"
+import { createTask, createTemplateTask } from "./newTask"
 
 const myIcon = projectIcons.find(
     (icon) => icon.alt === "a wrench and a screwdriver crossed"

@@ -1,6 +1,6 @@
 import { projectList } from "./newProject"
 
-export const taskList = []
+export let taskList = []
 
 export class Task {
     constructor(project, title, description, date, priority) {
@@ -66,4 +66,8 @@ export function createTemplateTask() {
             )
         }
     }
+}
+
+export function updateTaskList(updatedTaskList) {
+    taskList = updatedTaskList
 }

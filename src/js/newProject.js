@@ -2,7 +2,7 @@ import { Task } from "./newTask"
 import { projectIcons } from "./images"
 import { displayTasks } from "./displayTasks"
 
-export const projectList = []
+export let projectList = []
 
 export class Project {
     constructor(title, icon) {
@@ -53,4 +53,9 @@ export function selectCreatedProject() {
         sidebar.classList.toggle("active-section", sidebar === lastProjectNav)
     })
     displayTasks(lastProjectNav)
+}
+
+
+export function updateProjectList(updatedProjectList) {
+    projectList = updatedProjectList
 }
