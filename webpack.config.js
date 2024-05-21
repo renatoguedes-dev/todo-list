@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { merge } = require('webpack-merge');
 
 const commonConfig = {
-    mode: 'development',
+    mode: 'production',
     entry: './src/js/index.js',
     output: {
         filename: '[name][contenthash].js',
