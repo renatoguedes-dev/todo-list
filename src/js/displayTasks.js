@@ -4,12 +4,25 @@ import { openModal, removeAllChildNodes } from "./modals"
 import { projectList } from "./newProject"
 import { taskList, toggleTaskCompletion } from "./newTask"
 import { checkToday, checkWeek } from "./handleDates"
+import { openEditTaskModal } from "./editTask"
+import { openDeleteTaskModal } from "./eraseTask"
+import { openDetailsModal } from "./showDetails"
+import toggleMenu from "./menuBtn"
 
 const mainContent = document.querySelector("#mainContent")
 
+export let selectedSidebarNav = "All"
+
 export function handleSidebarClick(e) {
     const sidebarNavs = document.querySelectorAll(".sidebar-nav")
+    const menuBtn = document.querySelector(".menu-btn")
     const targetBar = e.currentTarget
+
+    // if @mediaquery is active and sidebar menu is open when button is clicked,
+    // it will close the sidebar menu
+    if (menuBtn.classList.contains("open")) {
+        toggleMenu()
+    }
 
     sidebarNavs.forEach((sidebar) => {
         sidebar.classList.toggle("active-section", sidebar === targetBar)
@@ -28,7 +41,7 @@ export function displayTasks(target) {
     createTasksDiv(taskList, targetTitle)
 }
 
-function createTasksDiv(taskList, target) {
+export function createTasksDiv(taskList, target) {
     const contentTitle = createDivElement("content-title")
     const tasksDiv = createDivElement("tasks-div")
 
@@ -40,6 +53,7 @@ function createTasksDiv(taskList, target) {
     switch (target) {
         case "All":
             createStartingTasksDiv()
+            selectedSidebarNav = title
             return
         case "Today":
             filteredTasks = taskList.filter(
@@ -47,6 +61,7 @@ function createTasksDiv(taskList, target) {
             )
             icon = icons.find((icon) => icon.name === "Today")
             title = icon?.name || target
+            selectedSidebarNav = title
             break
         case "Week":
             filteredTasks = taskList.filter(
@@ -54,6 +69,7 @@ function createTasksDiv(taskList, target) {
             )
             icon = icons.find((icon) => icon.name === "Week")
             title = icon?.name || target
+            selectedSidebarNav = title
             break
         case "Important":
             filteredTasks = taskList.filter(
@@ -61,6 +77,7 @@ function createTasksDiv(taskList, target) {
             )
             icon = icons.find((icon) => icon.name === "Important")
             title = icon?.name || target
+            selectedSidebarNav = title
             break
         case "Completed":
             filteredTasks = taskList.filter((task) => task.completed)
@@ -68,6 +85,7 @@ function createTasksDiv(taskList, target) {
             title = icon?.name || target
             createCompletedTasksDiv(icon, title, filteredTasks)
             setupEventListeners()
+            selectedSidebarNav = title
             return
         default: {
             project = projectList.find((p) => p.title === target)
@@ -79,6 +97,7 @@ function createTasksDiv(taskList, target) {
                 icon = project.icon
                 title = project.title
             }
+            selectedSidebarNav = title
         }
     }
 
@@ -111,10 +130,26 @@ function setupEventListeners() {
     if (newTaskBtn) {
         newTaskBtn.addEventListener("click", openModal)
     }
+
     const checkboxes = document.querySelectorAll(".checkbox")
     checkboxes.forEach((checkbox) =>
         checkbox.addEventListener("click", toggleCheckmark)
     )
+
+    const editTaskBtns = document.querySelectorAll(".edit-task-button")
+    editTaskBtns.forEach((button) => {
+        button.addEventListener("click", openEditTaskModal)
+    })
+
+    const eraseTaskBtns = document.querySelectorAll(".erase-task-button")
+    eraseTaskBtns.forEach((button) => {
+        button.addEventListener("click", openDeleteTaskModal)
+    })
+
+    const detailBtns = document.querySelectorAll(".detail")
+    detailBtns.forEach((button) => {
+        button.addEventListener("click", openDetailsModal)
+    })
 }
 
 export function createStartingTasksDiv() {

@@ -7,9 +7,14 @@ import {
     createButtonElement,
     appendChildren,
 } from "./helperFunctions"
+import { addNewTask } from "./addTask"
+
+export let ContentTitleText
 
 export default function createTaskModal() {
     const modalContent = document.querySelector(".modal-content")
+    const modalHeaderDiv = document.querySelector(".modal-header")
+    modalHeaderDiv.classList.remove("delete-modal-header")
     const modalHeader = document.querySelector(".modal-header-text")
     modalHeader.textContent = "Create a new task"
     removeAllChildNodes(modalContent)
@@ -71,7 +76,6 @@ export default function createTaskModal() {
     const createTodoBtnDiv = createDivElement("modal-buttons")
     const cancelModalBtn = createButtonElement("Cancel", "cancel-modal-btn")
     const createTodoBtn = createButtonElement("Create Task", "add-todo-btn")
-    cancelModalBtn.addEventListener("click", closeModal)
 
     // Assemble the form
     appendChildren(firstFieldsDiv, titleLabel, titleInput, titleError)
@@ -96,5 +100,22 @@ export default function createTaskModal() {
 
     appendChildren(modalContent, form, dateDiv, priorityLine)
 
+    const priorityBtns = document.querySelectorAll(".priority-buttons")
+    priorityBtns.forEach((div) => {
+        div.addEventListener("click", handlePriority)
+    })
+    cancelModalBtn.addEventListener("click", closeModal)
+    createTodoBtn.addEventListener("click", addNewTask)
+    const ContentTitleTextElement = document.querySelector(".content-title-text")
+    ContentTitleText = ContentTitleTextElement.textContent
+
     return modalContent
+}
+
+function handlePriority(e) {
+    const targetDiv = e.currentTarget
+    const priorityBtns = document.querySelectorAll(".priority-buttons")
+    priorityBtns.forEach((div) => {
+        div.classList.toggle("active-priority", div === targetDiv)
+    })
 }

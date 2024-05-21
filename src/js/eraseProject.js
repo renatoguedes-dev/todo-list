@@ -1,12 +1,10 @@
-import { handleIcons } from "./createProjectModal"
 import displayProjects from "./displayProjects"
-import { createStartingTasksDiv, displayTasks } from "./displayTasks"
+import { createStartingTasksDiv } from "./displayTasks"
 import {
     appendChildren,
     createButtonElement,
     createDivElement,
 } from "./helperFunctions"
-import { projectIcons } from "./images"
 import keyPressed from "./keyboardKeys"
 import { closeModal, removeAllChildNodes } from "./modals"
 import { projectList, updateProjectList } from "./newProject"
@@ -60,19 +58,21 @@ function createDeleteProjectModal(projectTitle) {
 
     appendChildren(modalButtons, cancelModalBtn, deleteProjectBtn)
 
-    modalContent.appendChild(modalButtons)
+    appendChildren(modalContent, modalButtons)
 
     cancelModalBtn.addEventListener("click", closeModal)
     deleteProjectBtn.addEventListener("click", deleteProject)
-    
 
     return modalContent
 }
 
 function deleteProject() {
-    
-    const updatedProjectList = projectList.filter((project) => project.title !== projectToDelete)
-    const updatedTaskList = taskList.filter((task) => task.project.title !== projectToDelete)
+    const updatedProjectList = projectList.filter(
+        (project) => project.title !== projectToDelete
+    )
+    const updatedTaskList = taskList.filter(
+        (task) => task.project.title !== projectToDelete
+    )
     updateProjectList(updatedProjectList)
     updateTaskList(updatedTaskList)
     closeModal()

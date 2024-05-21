@@ -8,8 +8,7 @@ import {
     createButtonElement,
     appendChildren,
 } from "./helperFunctions"
-import { createProject, selectCreatedProject } from "./newProject"
-import displayProjects from "./displayProjects"
+import { addNewProject } from "./addProject"
 
 export default function createProjectModal() {
     const modalContent = document.querySelector(".modal-content")
@@ -104,18 +103,6 @@ export function handleIcons(e) {
     })
 }
 
-export function addNewProject() {
-    const projectTitle = document.querySelector("#project-title")
-    const selectedIcon = document.querySelector(".project-icon.active-icon")
-    const title = projectTitle.value
-    const selectedIconAlt = selectedIcon.children[0].alt
-    const icon = projectIcons.find((icon) => icon.alt === selectedIconAlt)
 
-    createProject(title, icon)
-    closeModal()
-    displayProjects()
-    selectCreatedProject()
-    
-}
 
 

@@ -1,4 +1,4 @@
-import { addDays, format, isDate, isEqual, isWithinInterval, parse, startOfToday } from "date-fns"
+import { addDays, format, isDate, isEqual, isValid, isWithinInterval, parse, parseISO, startOfToday } from "date-fns"
 
 
 export function checkToday(date) {
@@ -56,4 +56,32 @@ export function checkWeek(date) {
     const isWithinWeek = isWithinInterval(parsedDate, { start: today, end: endOfWeekDate });
 
     return isWithinWeek;
+}
+
+export function formatTaskDate(taskDate) {
+    // Convert the taskDate string to a Date object
+    const date = parseISO(taskDate);
+    
+    // Format the Date object to the desired format "dd-MM-yyyy"
+    const formattedDate = format(date, 'dd-MM-yyyy');
+    
+    return formattedDate;
+}
+
+export function dateFormatToTasks(dateString) {
+    // Function to parse a date string in "dd-MM-yyyy" format to a Date object
+    const inputFormat = 'dd-MM-yyyy';
+    const parsedDate = parse(dateString, inputFormat, new Date());
+
+    if (!isValid(parsedDate)) {
+        throw new Error('Invalid date string');
+    }
+
+    // Define the desired output format
+    const outputFormat = 'yyyy-MM-dd';
+
+    // Format the Date object to a string in the desired output format
+    const formattedDate = format(parsedDate, outputFormat);
+
+    return formattedDate;
 }

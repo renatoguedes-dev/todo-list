@@ -1,6 +1,7 @@
 import keyPressed from "./keyboardKeys"
 import createProjectModal from "./createProjectModal"
 import createTaskModal from "./createTaskModal"
+import toggleMenu from "./menuBtn"
 
 const modal = document.querySelector("#modal")
 const overlay = document.querySelector("#overlay")
@@ -13,7 +14,15 @@ export function removeAllChildNodes(parent) {
 }
 
 export function openModal(e) {
+    const menuBtn = document.querySelector(".menu-btn")
     const target = e.currentTarget.id
+
+    // if @mediaquery is active and sidebar menu is open when button is clicked,
+    // it will close the sidebar menu
+    if (menuBtn.classList.contains("open")) {
+        toggleMenu()
+    }
+
     modal.classList.toggle("active")
     overlay.classList.toggle("active")
 

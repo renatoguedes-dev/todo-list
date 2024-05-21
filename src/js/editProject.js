@@ -1,4 +1,5 @@
-import createProjectModal, { addNewProject } from "./createProjectModal"
+import { addNewProject } from "./addProject"
+import createProjectModal from "./createProjectModal"
 import displayProjects from "./displayProjects"
 import { displayTasks } from "./displayTasks"
 import { projectIcons } from "./images"
@@ -76,7 +77,7 @@ function updateProject() {
     selectEditProject(title)
 }
 
-function selectEditProject(title) {
+export function selectEditProject(title) {
     const projectNavs = document.querySelectorAll(".projects-nav")
     let projectDiv
 
