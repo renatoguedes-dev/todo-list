@@ -1,24 +1,24 @@
-import keyPressed from "./keyboardKeys"
-import { projectList } from "./newProject"
+import keyPressed from "./keyboardKeys";
+import { projectList } from "./newProject";
 
-const modal = document.querySelector("#modal")
-const overlay = document.querySelector("#overlay")
+const modal = document.querySelector("#modal");
+const overlay = document.querySelector("#overlay");
 
 export function openDetailsModal(e) {
-    modal.classList.toggle("active")
-    overlay.classList.toggle("active")
+    modal.classList.toggle("active");
+    overlay.classList.toggle("active");
 
-    const taskTitle = e.composedPath()[2].children[0].children[1].innerText
-    const { projectName, selectedTask } = findTask(taskTitle)
-    createDetailsModal(projectName, selectedTask)
+    const taskTitle = e.composedPath()[2].children[0].children[1].innerText;
+    const { projectName, selectedTask } = findTask(taskTitle);
+    createDetailsModal(projectName, selectedTask);
 
-    window.addEventListener("keydown", keyPressed)
+    window.addEventListener("keydown", keyPressed);
 }
 
 function createDetailsModal(projectName, selectedTask) {
-    const modalHeader = document.querySelector(".modal-header-text")
-    modalHeader.textContent = "Task Details"
-    const modalContent = document.querySelector(".modal-content")
+    const modalHeader = document.querySelector(".modal-header-text");
+    modalHeader.textContent = "Task Details";
+    const modalContent = document.querySelector(".modal-content");
     modalContent.innerHTML = `
         <div class="project-detail-div details-divs">
             <p class="details-left-column">Project:</p>
@@ -39,23 +39,23 @@ function createDetailsModal(projectName, selectedTask) {
         <div class="priority-div details-divs">
             <p class="details-left-column">Priority:</p>
             <p class="details-right-column">${selectedTask.priority}</p></div>
-    `
+    `;
 }
 
 function findTask(taskTitle) {
     // find task and project
-    let projectName
-    let selectedTask
+    let projectName;
+    let selectedTask;
     for (let project of projectList) {
         project.tasks.forEach((task) => {
             if (task.title === taskTitle) {
-                selectedTask = task
-                projectName = project.title
+                selectedTask = task;
+                projectName = project.title;
             }
-        })
+        });
         if (selectedTask) {
-            break
+            break;
         }
     }
-    return { projectName, selectedTask }
+    return { projectName, selectedTask };
 }

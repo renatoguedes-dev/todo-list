@@ -1,9 +1,9 @@
 import { closeModal } from "./modals";
 
 export default function keyPressed(e) {
-  const pressedKey = e.key;
+    const pressedKey = e.key;
 
-  if (pressedKey === "Escape") {
-    closeModal();
-  }
+    if (pressedKey === "Escape") {
+        closeModal();
+    }
 }

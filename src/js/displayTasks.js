@@ -1,103 +1,103 @@
-import { appendChildren, createDivElement } from "./helperFunctions"
-import { icons } from "./images"
-import { openModal, removeAllChildNodes } from "./modals"
-import { projectList } from "./newProject"
-import { taskList, toggleTaskCompletion } from "./newTask"
-import { checkToday, checkWeek } from "./handleDates"
-import { openEditTaskModal } from "./editTask"
-import { openDeleteTaskModal } from "./eraseTask"
-import { openDetailsModal } from "./showDetails"
-import toggleMenu from "./menuBtn"
+import { appendChildren, createDivElement } from "./helperFunctions";
+import { icons } from "./images";
+import { openModal, removeAllChildNodes } from "./modals";
+import { projectList } from "./newProject";
+import { taskList, toggleTaskCompletion } from "./newTask";
+import { checkToday, checkWeek } from "./handleDates";
+import { openEditTaskModal } from "./editTask";
+import { openDeleteTaskModal } from "./eraseTask";
+import { openDetailsModal } from "./showDetails";
+import toggleMenu from "./menuBtn";
 
-const mainContent = document.querySelector("#mainContent")
+const mainContent = document.querySelector("#mainContent");
 
-export let selectedSidebarNav = "All"
+export let selectedSidebarNav = "All";
 
 export function handleSidebarClick(e) {
-    const sidebarNavs = document.querySelectorAll(".sidebar-nav")
-    const menuBtn = document.querySelector(".menu-btn")
-    const targetBar = e.currentTarget
+    const sidebarNavs = document.querySelectorAll(".sidebar-nav");
+    const menuBtn = document.querySelector(".menu-btn");
+    const targetBar = e.currentTarget;
 
     // if @mediaquery is active and sidebar menu is open when button is clicked,
     // it will close the sidebar menu
     if (menuBtn.classList.contains("open")) {
-        toggleMenu()
+        toggleMenu();
     }
 
     sidebarNavs.forEach((sidebar) => {
-        sidebar.classList.toggle("active-section", sidebar === targetBar)
-    })
+        sidebar.classList.toggle("active-section", sidebar === targetBar);
+    });
 
-    displayTasks(targetBar)
+    displayTasks(targetBar);
 }
 
 export function displayTasks(target) {
-    removeAllChildNodes(mainContent)
+    removeAllChildNodes(mainContent);
 
     const targetTitle = target.classList.contains("projects-nav")
         ? target.children[0].children[1].textContent
-        : target.children[1].textContent
+        : target.children[1].textContent;
 
-    createTasksDiv(taskList, targetTitle)
+    createTasksDiv(taskList, targetTitle);
 }
 
 export function createTasksDiv(taskList, target) {
-    const contentTitle = createDivElement("content-title")
-    const tasksDiv = createDivElement("tasks-div")
+    const contentTitle = createDivElement("content-title");
+    const tasksDiv = createDivElement("tasks-div");
 
-    let filteredTasks = []
-    let icon = null
-    let title = target
-    let project = null
+    let filteredTasks = [];
+    let icon = null;
+    let title = target;
+    let project = null;
 
     switch (target) {
         case "All":
-            createStartingTasksDiv()
-            selectedSidebarNav = title
-            return
+            createStartingTasksDiv();
+            selectedSidebarNav = title;
+            return;
         case "Today":
             filteredTasks = taskList.filter(
                 (task) => checkToday(task.date) && !task.completed
-            )
-            icon = icons.find((icon) => icon.name === "Today")
-            title = icon?.name || target
-            selectedSidebarNav = title
-            break
+            );
+            icon = icons.find((icon) => icon.name === "Today");
+            title = icon?.name || target;
+            selectedSidebarNav = title;
+            break;
         case "Week":
             filteredTasks = taskList.filter(
                 (task) => checkWeek(task.date) && !task.completed
-            )
-            icon = icons.find((icon) => icon.name === "Week")
-            title = icon?.name || target
-            selectedSidebarNav = title
-            break
+            );
+            icon = icons.find((icon) => icon.name === "Week");
+            title = icon?.name || target;
+            selectedSidebarNav = title;
+            break;
         case "Important":
             filteredTasks = taskList.filter(
                 (task) => task.priority === "High" && !task.completed
-            )
-            icon = icons.find((icon) => icon.name === "Important")
-            title = icon?.name || target
-            selectedSidebarNav = title
-            break
+            );
+            icon = icons.find((icon) => icon.name === "Important");
+            title = icon?.name || target;
+            selectedSidebarNav = title;
+            break;
         case "Completed":
-            filteredTasks = taskList.filter((task) => task.completed)
-            icon = icons.find((icon) => icon.name === "Completed")
-            title = icon?.name || target
-            createCompletedTasksDiv(icon, title, filteredTasks)
-            setupEventListeners()
-            selectedSidebarNav = title
-            return
+            filteredTasks = taskList.filter((task) => task.completed);
+            icon = icons.find((icon) => icon.name === "Completed");
+            title = icon?.name || target;
+            createCompletedTasksDiv(icon, title, filteredTasks);
+            setupEventListeners();
+            selectedSidebarNav = title;
+            return;
         default: {
-            project = projectList.find((p) => p.title === target)
+            project = projectList.find((p) => p.title === target);
             if (project) {
                 filteredTasks = taskList.filter(
                     (task) =>
                         task.project.title === project.title && !task.completed
-                )
-                icon = project.icon
-                title = project.title
+                );
+                icon = project.icon;
+                title = project.title;
             }
-            selectedSidebarNav = title
+            selectedSidebarNav = title;
         }
     }
 
@@ -105,98 +105,98 @@ export function createTasksDiv(taskList, target) {
         contentTitle.innerHTML = `
             <img class="content-title-img" src="${icon.src}" alt="${icon.alt}">
             <h1 class="content-title-text">${title}</h1>
-        `
+        `;
     } else {
         contentTitle.innerHTML = `
             <h1 class="content-title-text">${title}</h1>
-        `
+        `;
     }
 
     if (project) {
-        appendTasksTitle(tasksDiv, filteredTasks.length)
+        appendTasksTitle(tasksDiv, filteredTasks.length);
     } else {
-        appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
+        appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length);
     }
 
     filteredTasks.forEach((task) =>
         appendChildren(tasksDiv, createTaskContent(task))
-    )
-    appendChildren(mainContent, contentTitle, tasksDiv)
-    setupEventListeners()
+    );
+    appendChildren(mainContent, contentTitle, tasksDiv);
+    setupEventListeners();
 }
 
 function setupEventListeners() {
-    const newTaskBtn = document.querySelector("#newTaskBtn")
+    const newTaskBtn = document.querySelector("#newTaskBtn");
     if (newTaskBtn) {
-        newTaskBtn.addEventListener("click", openModal)
+        newTaskBtn.addEventListener("click", openModal);
     }
 
-    const checkboxes = document.querySelectorAll(".checkbox")
+    const checkboxes = document.querySelectorAll(".checkbox");
     checkboxes.forEach((checkbox) =>
         checkbox.addEventListener("click", toggleCheckmark)
-    )
+    );
 
-    const editTaskBtns = document.querySelectorAll(".edit-task-button")
+    const editTaskBtns = document.querySelectorAll(".edit-task-button");
     editTaskBtns.forEach((button) => {
-        button.addEventListener("click", openEditTaskModal)
-    })
+        button.addEventListener("click", openEditTaskModal);
+    });
 
-    const eraseTaskBtns = document.querySelectorAll(".erase-task-button")
+    const eraseTaskBtns = document.querySelectorAll(".erase-task-button");
     eraseTaskBtns.forEach((button) => {
-        button.addEventListener("click", openDeleteTaskModal)
-    })
+        button.addEventListener("click", openDeleteTaskModal);
+    });
 
-    const detailBtns = document.querySelectorAll(".detail")
+    const detailBtns = document.querySelectorAll(".detail");
     detailBtns.forEach((button) => {
-        button.addEventListener("click", openDetailsModal)
-    })
+        button.addEventListener("click", openDetailsModal);
+    });
 }
 
 export function createStartingTasksDiv() {
-    removeAllChildNodes(mainContent)
+    removeAllChildNodes(mainContent);
 
-    const contentTitle = createDivElement("content-title")
-    const tasksDiv = createDivElement("tasks-div")
+    const contentTitle = createDivElement("content-title");
+    const tasksDiv = createDivElement("tasks-div");
     contentTitle.innerHTML = `
         <img class="content-title-img" src="./assets/calendar-month-outline.svg" alt="month calendar">
         <h1 class="content-title-text">All</h1>
-    `
-    let filteredTasks = []
-    filteredTasks = taskList.filter((task) => !task.completed)
+    `;
+    let filteredTasks = [];
+    filteredTasks = taskList.filter((task) => !task.completed);
 
-    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
+    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length);
     taskList
         .filter((task) => !task.completed)
-        .forEach((task) => appendChildren(tasksDiv, createTaskContent(task)))
+        .forEach((task) => appendChildren(tasksDiv, createTaskContent(task)));
 
-    appendChildren(mainContent, contentTitle, tasksDiv)
-    setupEventListeners()
+    appendChildren(mainContent, contentTitle, tasksDiv);
+    setupEventListeners();
 }
 
 function appendTasksTitle(tasksDiv, taskCount) {
-    const taskTitle = createDivElement("tasks-title")
-    taskTitle.id = "tasksTitle"
+    const taskTitle = createDivElement("tasks-title");
+    taskTitle.id = "tasksTitle";
     taskTitle.innerHTML = `
         <p>Tasks (<span class="tasks-count">${taskCount}</span>)</p>
         <div data-modal-target="#modal" id="newTaskBtn" class="new-task-button">
             <p>+</p>
         </div>
-    `
-    appendChildren(tasksDiv, taskTitle)
+    `;
+    appendChildren(tasksDiv, taskTitle);
 }
 
 function appendTasksTitleWithoutTaskBtn(tasksDiv, taskCount) {
-    const taskTitle = createDivElement("tasks-title")
-    taskTitle.id = "tasksTitle"
+    const taskTitle = createDivElement("tasks-title");
+    taskTitle.id = "tasksTitle";
     taskTitle.innerHTML = `
         <p>Tasks (<span class="tasks-count">${taskCount}</span>)</p>
-    `
-    appendChildren(tasksDiv, taskTitle)
+    `;
+    appendChildren(tasksDiv, taskTitle);
 }
 
 function createTaskContent(task) {
-    const content = createDivElement("content")
-    content.id = "content"
+    const content = createDivElement("content");
+    content.id = "content";
     content.innerHTML = `
         <div class="left-content">
             <label class="container">
@@ -213,34 +213,34 @@ function createTaskContent(task) {
                 <img class="erase-task-button" src="./assets/trash-can-outline.png" alt="trash can icon">
             </div>
         </div>
-    `
-    return content
+    `;
+    return content;
 }
 
 export function createCompletedTasksDiv(icon, title, filteredTasks) {
-    removeAllChildNodes(mainContent)
+    removeAllChildNodes(mainContent);
 
-    const contentTitle = createDivElement("content-title")
-    const tasksDiv = createDivElement("tasks-div")
+    const contentTitle = createDivElement("content-title");
+    const tasksDiv = createDivElement("tasks-div");
     contentTitle.innerHTML = `
             <img class="content-title-img" src="${icon.src}" alt="${icon.alt}">
             <h1 class="content-title-text">${title}</h1>
-        `
+        `;
 
-    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length)
+    appendTasksTitleWithoutTaskBtn(tasksDiv, filteredTasks.length);
     taskList
         .filter((task) => task.completed)
         .forEach((task) =>
             appendChildren(tasksDiv, createCompletedTaskContent(task))
-        )
+        );
 
-    appendChildren(mainContent, contentTitle, tasksDiv)
-    setupEventListeners()
+    appendChildren(mainContent, contentTitle, tasksDiv);
+    setupEventListeners();
 }
 
 function createCompletedTaskContent(task) {
-    const content = createDivElement("content")
-    content.id = "content"
+    const content = createDivElement("content");
+    content.id = "content";
     content.innerHTML = `
         <div class="left-content">
             <label class="container">
@@ -257,19 +257,21 @@ function createCompletedTaskContent(task) {
                 <img class="erase-task-button" src="./assets/trash-can-outline.png" alt="trash can icon">
             </div>
         </div>
-    `
-    return content
+    `;
+    return content;
 }
 
 function toggleCheckmark(e) {
     // finds the element with the task name
-    const taskClicked = e.composedPath()[2].children[1]
+    const taskClicked = e.composedPath()[2].children[1];
 
     // selects the classList on the element with the task
-    const teste = e.composedPath()[2].children[1].classList
+    const teste = e.composedPath()[2].children[1].classList;
 
-    const task = taskList.find((task) => task.title === taskClicked.textContent)
+    const task = taskList.find(
+        (task) => task.title === taskClicked.textContent
+    );
 
-    toggleTaskCompletion(task)
-    teste.toggle("completed-task")
+    toggleTaskCompletion(task);
+    teste.toggle("completed-task");
 }
