@@ -4,8 +4,6 @@ import {
     createExampleTaskOne,
     createExampleTaskTwo,
 } from "./exampleProjectsAndTasks";
-import { projectList } from "./newProject";
-import { taskList } from "./newTask";
 
 export default function startPage() {
     createExampleTaskOne();

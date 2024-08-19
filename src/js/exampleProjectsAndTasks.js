@@ -37,7 +37,7 @@ export function createExampleTaskOne() {
     // create first example task
     createTask(
         project,
-        "begin renovation of the location",
+        "Begin renovation of the location",
         "Check craigslist and other websites to find workers",
         taskDateFormatted,
         "Medium"

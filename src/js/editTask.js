@@ -60,7 +60,6 @@ function updateTaskModal(title) {
 }
 
 function updateTask() {
-    console.log(taskList);
     // collect the values input by the user
     const taskTitleDiv = document.querySelector("#task-title");
     const title = taskTitleDiv.value;
@@ -121,8 +120,6 @@ function updateTask() {
     closeModal();
     // select the same sidebar that was selected before editing
     selectSameSidebar();
-
-    console.log(taskList);
 }
 
 function selectSameSidebar() {

@@ -3,6 +3,8 @@ Project: Todo List
 
 This is a ToDo website where you can create tasks linked to projects. The application allows users to manage their tasks efficiently with features like adding, editing, and deleting tasks, and categorizing them under different projects.
 
+<img src="src/assets/project-image/todo-list.png" alt="homepage's picture" >
+
 ## Technologies Used
 - JavaScript
 - HTML
